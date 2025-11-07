@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio Kawaii: Estructura Secundaria de Proteínas</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #fff5f7;
+            color: #555;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-top: 80px;
+        }
+        h1 {
+            text-align: center;
+            color: #ff85a2;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #ff85a2;
+            border-bottom: 2px dashed #ffc2d1;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #ff9ebb;
+        }
+        .section {
+            background-color: #fff0f5;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #ffc2d1;
+            scroll-margin-top: 100px;
+        }
+        .kawaii-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        .question {
+            background-color: #fff9fb;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #ff85a2;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .options label:hover {
+            background-color: #ffe4ec;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .options input {
+            margin-right: 8px;
+        }
+        .answer-key {
+            background-color: #e8f4f8;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 2px solid #a2d2ff;
+        }
+        .answer-key h2 {
+            color: #a2d2ff;
+            border-bottom: 2px dashed #bde0fe;
+        }
+        .answer-explanation {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+        }
+        button {
+            background-color: #ff85a2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff6b9d;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header-img {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header-img img {
+            max-width: 200px;
+        }
+        .topic {
+            margin-bottom: 30px;
+        }
+        
+        /* Barra de navegación */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffc2d1;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #ff4d7a;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links li {
+            margin-left: 20px;
+        }
+        .nav-links a {
+            color: #ff4d7a;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #ff85a2;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Efectos para las opciones seleccionadas */
+        .options input:checked + span {
+            font-weight: bold;
+            color: #ff4d7a;
+        }
+        .options label:has(input:checked) {
+            background-color: #ffd6e0;
+            border: 2px solid #ff85a2;
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(255, 133, 162, 0.3);
+        }
+        
+        /* Animación suave al desplazarse */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Botones de acción */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .home-button {
+            background-color: #a2d2ff;
+        }
+        .home-button:hover {
+            background-color: #7fbfff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🏠</span>
+                Inicio
+            </a>
+            <ul class="nav-links">
+                <li><a href="#introduccion">Introducción</a></li>
+                <li><a href="#estructura-secundaria">Estructura Secundaria</a></li>
+                <li><a href="#helice-alfa">Hélice Alfa</a></li>
+                <li><a href="#hoja-beta">Hoja Beta</a></li>
+                <li><a href="#estructuras-no-repetitivas">Estructuras No Repetitivas</a></li>
+                <li><a href="#solucionario">Solucionario</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="header-img">
+            <div style="font-size: 4em;">🧬🌸</div>
+        </div>
+        <h1>Estructura Secundaria de Proteínas</h1>
+        
+        <!-- Introducción -->
+        <div class="section topic" id="introduccion">
+            <h2><span class="kawaii-icon">📚</span>Introducción</h2>
+            
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Las proteínas presentan cuatro niveles de organización estructural: primaria, secundaria, terciaria y cuaternaria. La estructura secundaria se refiere al ordenamiento espacial de residuos de aminoácidos cercanos en la secuencia lineal, formando estructuras periódicas. El enlace peptídico es rígido y plano, lo que limita las posibles conformaciones de la cadena polipeptídica. Las interacciones que estabilizan el plegamiento incluyen puentes de hidrógeno, interacciones hidrofóbicas, fuerzas de van der Waals y puentes disulfuro.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>1. ¿Cuáles de las siguientes afirmaciones sobre los niveles de estructura proteica son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q1" value="a"><span> La estructura primaria se refiere a la secuencia de aminoácidos</span></label>
+                        <label><input type="checkbox" name="q1" value="b"><span> La estructura secundaria incluye el plegamiento de múltiples cadenas polipeptídicas</span></label>
+                        <label><input type="checkbox" name="q1" value="c"><span> La estructura terciaria describe el plegamiento completo de una cadena polipeptídica</span></label>
+                        <label><input type="checkbox" name="q1" value="d"><span> La estructura cuaternaria implica la interacción de dos o más cadenas polipeptídicas</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>2. Un investigador está estudiando una proteína y descubre que contiene puentes disulfuro. ¿En qué nivel(es) estructural(es) se encuentran estos puentes?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q2" value="a"><span> Estructura primaria</span></label>
+                        <label><input type="checkbox" name="q2" value="b"><span> Estructura secundaria</span></label>
+                        <label><input type="checkbox" name="q2" value="c"><span> Estructura terciaria</span></label>
+                        <label><input type="checkbox" name="q2" value="d"><span> Estructura cuaternaria</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>3. ¿Cuáles de las siguientes interacciones contribuyen a estabilizar la estructura tridimensional de las proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q3" value="a"><span> Puentes de hidrógeno</span></label>
+                        <label><input type="checkbox" name="q3" value="b"><span> Interacciones hidrofóbicas</span></label>
+                        <label><input type="checkbox" name="q3" value="c"><span> Fuerzas de van der Waals</span></label>
+                        <label><input type="checkbox" name="q3" value="d"><span> Puentes disulfuro</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>4. Según los postulados de Pauling y Corey, ¿cuáles son las características del enlace peptídico?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q4" value="a"><span> Los átomos del enlace peptídico están en un mismo plano</span></label>
+                        <label><input type="checkbox" name="q4" value="b"><span> El enlace peptídico es altamente flexible</span></label>
+                        <label><input type="checkbox" name="q4" value="c"><span> El enlace peptídico presenta configuración trans en la mayoría de las proteínas</span></label>
+                        <label><input type="checkbox" name="q4" value="d"><span> El enlace peptídico puede rotar libremente alrededor del carbono α</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>5. En la industria farmacéutica, se diseñan medicamentos que actúan sobre proteínas específicas. Un equipo de investigación está desarrollando un fármaco que debe unirse a una región específica de una proteína implicada en una enfermedad. ¿Qué nivel(es) de estructura proteica sería(n) más relevante(s) para el diseño de este fármaco?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q5" value="a"><span> Estructura primaria, porque determina la secuencia de aminoácidos</span></label>
+                        <label><input type="checkbox" name="q5" value="b"><span> Estructura secundaria, porque define regiones como hélices alfa y hojas beta</span></label>
+                        <label><input type="checkbox" name="q5" value="c"><span> Estructura terciaria, porque determina el plegamiento tridimensional completo</span></label>
+                        <label><input type="checkbox" name="q5" value="d"><span> Estructura cuaternaria, si la proteína está formada por múltiples subunidades</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Estructura secundaria -->
+        <div class="section topic" id="estructura-secundaria">
+            <h2><span class="kawaii-icon">🔬</span>Estructura Secundaria</h2>
+            
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>La estructura secundaria se define como el ordenamiento espacial de residuos de aminoácidos próximos entre sí en un segmento de la secuencia lineal, dando lugar a una estructura periódica. Es una conformación local que incluye estructuras repetitivas (hélice-α y hoja plegada β) y no repetitivas (giros β y lazos). Los modelos de estructura secundaria cumplen con las restricciones impuestas por la rigidez del enlace peptídico, permitiendo rotaciones solo alrededor de los enlaces a ambos lados de la unidad peptídica rígida.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>6. ¿Cuáles de las siguientes afirmaciones sobre la estructura secundaria de las proteínas son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q6" value="a"><span> Es el ordenamiento espacial de residuos de aminoácidos próximos en la secuencia</span></label>
+                        <label><input type="checkbox" name="q6" value="b"><span> Incluye estructuras repetitivas como la hélice alfa y la hoja beta</span></label>
+                        <label><input type="checkbox" name="q6" value="c"><span> Se refiere al plegamiento completo de la cadena polipeptídica</span></label>
+                        <label><input type="checkbox" name="q6" value="d"><span> Incluye estructuras no repetitivas como giros beta y lazos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>7. ¿Qué restricciones impone el enlace peptídico a la estructura secundaria?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q7" value="a"><span> Los átomos del enlace peptídico están en un mismo plano</span></label>
+                        <label><input type="checkbox" name="q7" value="b"><span> El enlace peptídico es altamente flexible</span></label>
+                        <label><input type="checkbox" name="q7" value="c"><span> Las rotaciones solo son posibles alrededor de los enlaces a ambos lados de la unidad peptídica</span></label>
+                        <label><input type="checkbox" name="q7" value="d"><span> El enlace peptídico puede adoptar configuraciones cis y trans sin restricciones</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>8. En un modelo de estructura repetitiva, ¿qué caracteriza los ángulos Φ y Ψ?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q8" value="a"><span> Se mantienen constantes a lo largo de todo el segmento plegado</span></label>
+                        <label><input type="checkbox" name="q8" value="b"><span> Varían aleatoriamente a lo largo de la cadena</span></label>
+                        <label><input type="checkbox" name="q8" value="c"><span> Todos los pares de valores originan modelos estructurales estables</span></label>
+                        <label><input type="checkbox" name="q8" value="d"><span> Solo algunos pares de valores originan modelos estructurales estables</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>9. ¿Cuáles son los tipos principales de estructura secundaria repetitiva?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q9" value="a"><span> Hélice alfa</span></label>
+                        <label><input type="checkbox" name="q9" value="b"><span> Hoja beta</span></label>
+                        <label><input type="checkbox" name="q9" value="c"><span> Giros beta</span></label>
+                        <label><input type="checkbox" name="q9" value="d"><span> Lazos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>10. Un bioinformático está desarrollando un algoritmo para predecir la estructura secundaria de proteínas basándose en su secuencia de aminoácidos. ¿Qué características de la secuencia debería considerar su algoritmo para identificar regiones con estructura secundaria?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q10" value="a"><span> La presencia de aminoácidos con tendencia a formar hélices alfa</span></label>
+                        <label><input type="checkbox" name="q10" value="b"><span> La distribución de residuos hidrofóbicos e hidrofílicos</span></label>
+                        <label><input type="checkbox" name="q10" value="c"><span> La presencia de prolina, que suele romper las hélices alfa</span></label>
+                        <label><input type="checkbox" name="q10" value="d"><span> La carga neta de la proteína completa</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hélice alfa -->
+        <div class="section topic" id="helice-alfa">
+            <h2><span class="kawaii-icon">🌀</span>Hélice Alfa</h2>
+            
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>La hélice alfa es una estructura secundaria en la que la cadena polipeptídica se arrolla en forma dextrógira alrededor de un cilindro. Presenta 3.6 residuos por vuelta, con un avance de 1.5 Å por residuo. Los grupos R se proyectan hacia el exterior, y los puentes de hidrógeno intracatenarios se establecen entre el grupo carbonilo del residuo n y el grupo amino del residuo n+4, paralelos al eje de la hélice. La estructura presenta un dipolo eléctrico global y puede ser anfipática (con lados polares y apolares) o apolar. Factores que afectan su estabilidad incluyen interacciones entre grupos R, presencia de residuos voluminosos y la prolina, que introduce giros que rompen la arquitectura helicoidal.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>11. ¿Cuáles de las siguientes son características de la hélice alfa?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q11" value="a"><span> Presenta 3.6 residuos por vuelta</span></label>
+                        <label><input type="checkbox" name="q11" value="b"><span> Los puentes de hidrógeno son intracatenarios y paralelos al eje</span></label>
+                        <label><input type="checkbox" name="q11" value="c"><span> Los grupos R se proyectan hacia el interior de la hélice</span></label>
+                        <label><input type="checkbox" name="q11" value="d"><span> Es una estructura polar con un dipolo eléctrico global</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>12. ¿Cómo se establecen los puentes de hidrógeno en la hélice alfa?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q12" value="a"><span> Entre el grupo CO del residuo n y el grupo NH del residuo n+4</span></label>
+                        <label><input type="checkbox" name="q12" value="b"><span> Entre el grupo CO del residuo n y el grupo NH del residuo n+3</span></label>
+                        <label><input type="checkbox" name="q12" value="c"><span> Son paralelos al eje de la hélice</span></label>
+                        <label><input type="checkbox" name="q12" value="d"><span> Son perpendiculares al eje de la hélice</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>13. ¿Qué factores afectan la estabilidad de la hélice alfa?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q13" value="a"><span> Repulsión o atracción entre grupos R cargados adyacentes</span></label>
+                        <label><input type="checkbox" name="q13" value="b"><span> Presencia de grupos R voluminosos estructuralmente adyacentes</span></label>
+                        <label><input type="checkbox" name="q13" value="c"><span> Interacciones entre grupos R de aminoácidos separados por 3 o 4 residuos</span></label>
+                        <label><input type="checkbox" name="q13" value="d"><span> La presencia de prolina, que introduce giros y rompe la arquitectura</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>14. ¿Cuáles de los siguientes aminoácidos tienden a estabilizar la hélice alfa?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q14" value="a"><span> Alanina (Ala)</span></label>
+                        <label><input type="checkbox" name="q14" value="b"><span> Leucina (Leu)</span></label>
+                        <label><input type="checkbox" name="q14" value="c"><span> Prolina (Pro)</span></label>
+                        <label><input type="checkbox" name="q14" value="d"><span> Glicina (Gly)</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>15. En el diseño de proteínas terapéuticas, los investigadores a menudo intentan modificar la estabilidad de las hélices alfa para mejorar la eficacia del fármaco. Si un equipo está diseñando una proteína con una hélice alfa que debe ser particularmente estable, ¿qué estrategias deberían considerar?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q15" value="a"><span> Incluir aminoácidos como alanina y leucina que favorecen la formación de hélices</span></label>
+                        <label><input type="checkbox" name="q15" value="b"><span> Evitar la presencia de prolina en las regiones helicoidales</span></label>
+                        <label><input type="checkbox" name="q15" value="c"><span> Diseñar hélices anfipáticas con distribución adecuada de residuos polares y apolares</span></label>
+                        <label><input type="checkbox" name="q15" value="d"><span> Maximizar el número de residuos de glicina en la hélice</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hoja beta -->
+        <div class="section topic" id="hoja-beta">
+            <h2><span class="kawaii-icon">📄</span>Hoja Beta</h2>
+            
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>La hoja beta (o lámina plegada β) se forma cuando dos o más segmentos de cadenas polipeptídicas se alinean lateralmente. Presenta un esqueleto extendido en zig-zag, con los grupos R dispuestos verticalmente en posición trans. Los puentes de hidrógeno se establecen entre componentes del enlace peptídico en hebras diferentes, perpendiculares al eje longitudinal. Existen dos tipos principales: hojas beta antiparalelas (con cadenas orientadas en direcciones opuestas) y paralelas (con cadenas orientadas en la misma dirección). Las hojas antiparalelas son más estables debido a la distancia y ángulos óptimos para formar puentes de hidrógeno.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>16. ¿Cuáles son características de la hoja beta?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q16" value="a"><span> Se forma cuando segmentos de cadenas polipeptídicas se alinean lateralmente</span></label>
+                        <label><input type="checkbox" name="q16" value="b"><span> Presenta un esqueleto extendido en zig-zag</span></label>
+                        <label><input type="checkbox" name="q16" value="c"><span> Los puentes de hidrógeno son intracatenarios</span></label>
+                        <label><input type="checkbox" name="q16" value="d"><span> Los grupos R se disponen verticalmente en posición trans</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>17. ¿Cómo se establecen los puentes de hidrógeno en la hoja beta?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q17" value="a"><span> Entre componentes del enlace peptídico en hebras diferentes</span></label>
+                        <label><input type="checkbox" name="q17" value="b"><span> Son perpendiculares al eje longitudinal de la hoja</span></label>
+                        <label><input type="checkbox" name="q17" value="c"><span> Son paralelos al eje longitudinal de la hoja</span></label>
+                        <label><input type="checkbox" name="q17" value="d"><span> Entre el grupo CO de una hebra y el grupo NH de la hebra vecina</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>18. ¿Qué diferencia a las hojas beta antiparalelas de las paralelas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q18" value="a"><span> En las antiparalelas, las cadenas tienen orientaciones opuestas</span></label>
+                        <label><input type="checkbox" name="q18" value="b"><span> En las paralelas, todas las hebras van en el mismo sentido</span></label>
+                        <label><input type="checkbox" name="q18" value="c"><span> Las antiparalelas son más estables que las paralelas</span></label>
+                        <label><input type="checkbox" name="q18" value="d"><span> Las paralelas presentan puentes de hidrógeno más fuertes</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>19. ¿Qué proteínas presentan predominantemente estructura de hoja beta?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q19" value="a"><span> Pre-albúmina</span></label>
+                        <label><input type="checkbox" name="q19" value="b"><span> Inmunoglobulinas</span></label>
+                        <label><input type="checkbox" name="q19" value="c"><span> Mioglobina</span></label>
+                        <label><input type="checkbox" name="q19" value="d"><span> Hexoquinasa</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>20. Las proteínas priónicas, asociadas con enfermedades neurodegenerativas como el mal de las vacas locas, experimentan un cambio conformacional que convierte hélices alfa en hojas beta. Este cambio las hace insolubles y propensas a formar agregados. ¿Qué implicaciones tendría este cambio estructural en las propiedades de la proteína?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q20" value="a"><span> Mayor tendencia a formar agregados insolubles</span></label>
+                        <label><input type="checkbox" name="q20" value="b"><span> Cambio en la solubilidad de la proteína</span></label>
+                        <label><input type="checkbox" name="q20" value="c"><span> Pérdida de función biológica normal</span></label>
+                        <label><input type="checkbox" name="q20" value="d"><span> Mayor resistencia a la degradación proteolítica</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Estructuras no repetitivas -->
+        <div class="section topic" id="estructuras-no-repetitivas">
+            <h2><span class="kawaii-icon">🔄</span>Estructuras No Repetitivas</h2>
+            
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Las estructuras no repetitivas incluyen giros beta y lazos (estructuras al azar). Los giros beta son elementos de conexión entre hélices alfa y/o láminas beta que determinan cambios de dirección en las cadenas polipeptídicas. Se forman puentes de hidrógeno entre un residuo n y el situado tres aminoácidos después (n+3). La prolina y la glicina abundan en los giros beta. Los lazos presentan estructura irregular, generalmente se exponen en la superficie de la proteína y son regiones ricas en aminoácidos polares o cargados. Contribuyen considerablemente al plegamiento tridimensional y son regiones variables entre miembros de una familia proteica.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>21. ¿Cuáles son características de los giros beta?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q21" value="a"><span> Son elementos de conexión entre hélices alfa y/o láminas beta</span></label>
+                        <label><input type="checkbox" name="q21" value="b"><span> Determinan cambios de dirección de las cadenas polipeptídicas</span></label>
+                        <label><input type="checkbox" name="q21" value="c"><span> Se forma un puente de hidrógeno entre residuo n y n+3</span></label>
+                        <label><input type="checkbox" name="q21" value="d"><span> La prolina y la glicina abundan en los giros beta</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>22. ¿Qué función cumplen los giros beta en la estructura de las proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q22" value="a"><span> Permiten cambios de dirección de la cadena polipeptídica</span></label>
+                        <label><input type="checkbox" name="q22" value="b"><span> Facilitan la formación de hojas beta antiparalelas</span></label>
+                        <label><input type="checkbox" name="q22" value="c"><span> Contribuyen al plegamiento tridimensional</span></label>
+                        <label><input type="checkbox" name="q22" value="d"><span> Aumentan la rigidez de la estructura proteica</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>23. ¿Cuáles son características de los lazos o estructuras al azar?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q23" value="a"><span> Presentan estructura irregular</span></label>
+                        <label><input type="checkbox" name="q23" value="b"><span> Generalmente se exponen en la superficie de la proteína</span></label>
+                        <label><input type="checkbox" name="q23" value="c"><span> Son regiones ricas en aminoácidos polares o cargados</span></label>
+                        <label><input type="checkbox" name="q23" value="d"><span> Son regiones muy conservadas entre miembros de una familia proteica</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>24. ¿Qué importancia tienen los lazos en la función proteica?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q24" value="a"><span> Contribuyen al plegamiento tridimensional</span></label>
+                        <label><input type="checkbox" name="q24" value="b"><span> Generalmente son regiones que interactúan con otras proteínas o ligandos</span></label>
+                        <label><input type="checkbox" name="q24" value="c"><span> Son regiones muy variables entre miembros de una familia</span></label>
+                        <label><input type="checkbox" name="q24" value="d"><span> Proporcionan rigidez estructural a la proteína</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>25. En el desarrollo de vacunas, a menudo se buscan regiones de proteínas virales que sean accesibles al sistema inmune. Considerando las diferentes estructuras secundarias, ¿qué tipo de regiones serían más adecuadas para diseñar anticuerpos específicos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q25" value="a"><span> Lazos en la superficie de la proteína, por su accesibilidad</span></label>
+                        <label><input type="checkbox" name="q25" value="b"><span> Hélices alfa en el interior de la proteína, por su estabilidad</span></label>
+                        <label><input type="checkbox" name="q25" value="c"><span> Regiones variables entre cepas virales, para lograr especificidad</span></label>
+                        <label><input type="checkbox" name="q25" value="d"><span> Regiones conservadas entre cepas virales, para lograr protección amplia</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Solucionario -->
+        <div class="answer-key" id="solucionario">
+            <h2><span class="kawaii-icon">✅</span>Solucionario</h2>
+            <p>Aquí puedes verificar tus respuestas y entender por qué son correctas o incorrectas.</p>
+            
+            <div class="answer-item">
+                <h3>Pregunta 1</h3>
+                <p><strong>Respuestas correctas:</strong> a, c, d</p>
+                <p class="answer-explanation">La estructura secundaria no incluye el plegamiento de múltiples cadenas polipeptídicas, eso corresponde a la estructura cuaternaria.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 2</h3>
+                <p><strong>Respuestas correctas:</strong> c, d</p>
+                <p class="answer-explanation">Los puentes disulfuro pueden estabilizar tanto la estructura terciaria (dentro de una cadena) como la cuaternaria (entre cadenas).</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 3</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todas estas interacciones contribuyen a estabilizar la estructura tridimensional de las proteínas.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 4</h3>
+                <p><strong>Respuestas correctas:</strong> a, c</p>
+                <p class="answer-explanation">El enlace peptídico es rígido y plano, con configuración trans en la mayoría de las proteínas. No es altamente flexible y no puede rotar libremente alrededor del carbono α.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 5</h3>
+                <p><strong>Respuestas correctas:</strong> b, c, d</p>
+                <p class="answer-explanation">Para el diseño de fármacos, la estructura primaria es menos relevante que las estructuras secundaria, terciaria y cuaternaria, ya que estas determinan la forma tridimensional y los sitios de unión.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 6</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, d</p>
+                <p class="answer-explanation">La estructura secundaria se refiere al ordenamiento local de residuos cercanos, no al plegamiento completo de la cadena (que corresponde a la estructura terciaria).</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 7</h3>
+                <p><strong>Respuestas correctas:</strong> a, c</p>
+                <p class="answer-explanation">El enlace peptídico es rígido y plano, permitiendo rotaciones solo alrededor de los enlaces a ambos lados de la unidad peptídica. No es altamente flexible y no puede adoptar configuraciones cis y trans sin restricciones.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 8</h3>
+                <p><strong>Respuestas correctas:</strong> a, d</p>
+                <p class="answer-explanation">En una estructura repetitiva, los ángulos Φ y Ψ se mantienen constantes a lo largo del segmento plegado, y solo algunos pares de valores originan modelos estructurales estables.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 9</h3>
+                <p><strong>Respuestas correctas:</strong> a, b</p>
+                <p class="answer-explanation">Los tipos principales de estructura secundaria repetitiva son la hélice alfa y la hoja beta. Los giros beta y lazos son estructuras no repetitivas.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 10</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">Para predecir estructura secundaria, el algoritmo debería considerar la presencia de aminoácidos con tendencia a formar hélices, la distribución de residuos hidrofóbicos/hidrofílicos y la presencia de prolina. La carga neta completa es menos relevante para predecir estructura secundaria local.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 11</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, d</p>
+                <p class="answer-explanation">En la hélice alfa, los grupos R se proyectan hacia el exterior, no hacia el interior.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 12</h3>
+                <p><strong>Respuestas correctas:</strong> a, c</p>
+                <p class="answer-explanation">Los puentes de hidrógeno en la hélice alfa se establecen entre el grupo CO del residuo n y el grupo NH del residuo n+4, y son paralelos al eje de la hélice.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 13</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todos estos factores afectan la estabilidad de la hélice alfa.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 14</h3>
+                <p><strong>Respuestas correctas:</strong> a, b</p>
+                <p class="answer-explanation">La alanina y la leucina tienden a estabilizar la hélice alfa, mientras que la prolina y la glicina tienden a desestabilizarla.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 15</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">Para estabilizar una hélice alfa, se deben incluir aminoácidos que favorecen hélices, evitar prolina y diseñar hélices anfipáticas. La glicina tiende a desestabilizar las hélices.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 16</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, d</p>
+                <p class="answer-explanation">En la hoja beta, los puentes de hidrógeno son intercatenarios (entre hebras diferentes), no intracatenarios.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 17</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, d</p>
+                <p class="answer-explanation">Los puentes de hidrógeno en la hoja beta son perpendiculares al eje longitudinal, no paralelos.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 18</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">Las hojas beta antiparalelas son más estables que las paralelas debido a la distancia y ángulos óptimos para formar puentes de hidrógeno.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 19</h3>
+                <p><strong>Respuestas correctas:</strong> a, b</p>
+                <p class="answer-explanation">La pre-albúmina y las inmunoglobulinas presentan predominantemente estructura de hoja beta. La mioglobina es principalmente hélice alfa y la hexoquinasa tiene estructura mixta.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 20</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">El cambio de hélice alfa a hoja beta en proteínas priónicas conduce a todas estas consecuencias: formación de agregados insolubles, cambio en solubilidad, pérdida de función y mayor resistencia a la degradación.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 21</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todas estas son características de los giros beta.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 22</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">Los giros beta permiten cambios de dirección, facilitan la formación de hojas beta antiparalelas y contribuyen al plegamiento tridimensional, pero no aumentan la rigidez estructural.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 23</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">Los lazos generalmente son regiones variables entre miembros de una familia proteica, no muy conservadas.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 24</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">Los lazos contribuyen al plegamiento, interactúan con otras moléculas y son regiones variables, pero no proporcionan rigidez estructural.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 25</h3>
+                <p><strong>Respuestas correctas:</strong> a, c, d</p>
+                <p class="answer-explanation">Para el desarrollo de vacunas, las regiones más adecuadas son los lazos en la superficie (accesibles), regiones variables (para especificidad) y regiones conservadas (para protección amplia). Las hélices alfa en el interior no son accesibles.</p>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button onclick="checkAnswers()">Verificar respuestas</button>
+            <button onclick="resetAnswers()">Reiniciar respuestas</button>
+            <a href="index.html" style="text-decoration: none;">
+                <button class="home-button">Volver al Inicio</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            const correctAnswers = {
+                q1: ['a', 'c', 'd'],
+                q2: ['c', 'd'],
+                q3: ['a', 'b', 'c', 'd'],
+                q4: ['a', 'c'],
+                q5: ['b', 'c', 'd'],
+                q6: ['a', 'b', 'd'],
+                q7: ['a', 'c'],
+                q8: ['a', 'd'],
+                q9: ['a', 'b'],
+                q10: ['a', 'b', 'c'],
+                q11: ['a', 'b', 'd'],
+                q12: ['a', 'c'],
+                q13: ['a', 'b', 'c', 'd'],
+                q14: ['a', 'b'],
+                q15: ['a', 'b', 'c'],
+                q16: ['a', 'b', 'd'],
+                q17: ['a', 'b', 'd'],
+                q18: ['a', 'b', 'c'],
+                q19: ['a', 'b'],
+                q20: ['a', 'b', 'c', 'd'],
+                q21: ['a', 'b', 'c', 'd'],
+                q22: ['a', 'b', 'c'],
+                q23: ['a', 'b', 'c'],
+                q24: ['a', 'b', 'c'],
+                q25: ['a', 'c', 'd']
+            };
+            
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            
+            for (const question in correctAnswers) {
+                const selectedOptions = Array.from(document.querySelectorAll(`input[name="${question}"]:checked`)).map(input => input.value);
+                const correctOptions = correctAnswers[question];
+                
+                // Verificar si las respuestas seleccionadas coinciden exactamente con las correctas
+                if (selectedOptions.length === correctOptions.length && 
+                    selectedOptions.every(option => correctOptions.includes(option))) {
+                    score++;
+                }
+            }
+            
+            alert(`Has acertado ${score} de ${totalQuestions} preguntas. ¡Revisa el solucionario para más detalles!`);
+        }
+        
+        function resetAnswers() {
+            const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+            allCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            alert('Todas las respuestas han sido reiniciadas.');
+        }
+    </script>
+</body>
+</html>

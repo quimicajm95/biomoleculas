@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio Kawaii de Lípidos II</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #fff5f7;
+            color: #555;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-top: 80px;
+        }
+        h1 {
+            text-align: center;
+            color: #ff85a2;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #ff85a2;
+            border-bottom: 2px dashed #ffc2d1;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #ff9ebb;
+        }
+        .section {
+            background-color: #fff0f5;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #ffc2d1;
+            scroll-margin-top: 100px;
+        }
+        .kawaii-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        .question {
+            background-color: #fff9fb;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #ff85a2;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .options label:hover {
+            background-color: #ffe4ec;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .options input {
+            margin-right: 8px;
+        }
+        .answer-key {
+            background-color: #e8f4f8;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 2px solid #a2d2ff;
+        }
+        .answer-key h2 {
+            color: #a2d2ff;
+            border-bottom: 2px dashed #bde0fe;
+        }
+        .answer-explanation {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+        }
+        button {
+            background-color: #ff85a2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff6b9d;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header-img {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header-img img {
+            max-width: 200px;
+        }
+        .topic {
+            margin-bottom: 30px;
+        }
+        
+        /* Barra de navegación */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffc2d1;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #ff4d7a;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links li {
+            margin-left: 20px;
+        }
+        .nav-links a {
+            color: #ff4d7a;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #ff85a2;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Efectos para las opciones seleccionadas */
+        .options input:checked + span {
+            font-weight: bold;
+            color: #ff4d7a;
+        }
+        .options label:has(input:checked) {
+            background-color: #ffd6e0;
+            border: 2px solid #ff85a2;
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(255, 133, 162, 0.3);
+        }
+        
+        /* Animación suave al desplazarse */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Botones de acción */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .home-button {
+            background-color: #a2d2ff;
+        }
+        .home-button:hover {
+            background-color: #7fbfff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="lipidos_1.html" class="logo">
+                <span class="logo-icon">🏠</span>
+                Inicio
+            </a>
+            <ul class="nav-links">
+                <li><a href="#introduccion">Introducción</a></li>
+                <li><a href="#acidos-grasos">Ácidos Grasos</a></li>
+                <li><a href="#propiedades">Propiedades</a></li>
+                <li><a href="#acilgliceridos">Acilglicéridos</a></li>
+                <li><a href="#fosfogliceridos">Fosfoglicéridos</a></li>
+                <li><a href="#esfingolipidos">Esfingolípidos</a></li>
+                <li><a href="#solucionario">Solucionario</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="header-img">
+            <div style="font-size: 4em;">🧪🌸</div>
+        </div>
+        <h1>Estudio Kawaii de Lípidos II</h1>
+        
+        <!-- Introducción -->
+        <div class="section topic" id="introduccion">
+            <h2><span class="kawaii-icon">📚</span>Introducción a las Membranas Biológicas</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Los lípidos constituyen una reserva energética de elevado contenido calórico y representan una forma compacta y anhidra de almacenamiento de energía. Las membranas biológicas están formadas por lípidos de tipo anfipático que tienden a estructurarse formando bicapas lipídicas en medio acuoso. Entre los componentes de las membranas se encuentran proteínas integrales, colesterol, glicoproteínas y glicolípidos.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>1. ¿Cuáles de las siguientes afirmaciones sobre las membranas biológicas son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q1" value="a"><span> Están formadas por lípidos anfipáticos que forman bicapas en medio acuoso</span></label>
+                        <label><input type="checkbox" name="q1" value="b"><span> Solo contienen lípidos y no proteínas</span></label>
+                        <label><input type="checkbox" name="q1" value="c"><span> El colesterol es un componente importante de muchas membranas biológicas</span></label>
+                        <label><input type="checkbox" name="q1" value="d"><span> Los lípidos de membrana son siempre completamente hidrofóbicos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>2. Juan está estudiando la composición de las membranas celulares para su proyecto de biología. ¿Qué componentes debería incluir en su modelo de membrana para que sea más preciso?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q2" value="a"><span> Fosfolípidos que forman una bicapa</span></label>
+                        <label><input type="checkbox" name="q2" value="b"><span> Proteínas integrales que atraviesan la membrana</span></label>
+                        <label><input type="checkbox" name="q2" value="c"><span> Colesterol que modula la fluidez de la membrana</span></label>
+                        <label><input type="checkbox" name="q2" value="d"><span> Glicolípidos en la cara externa de la membrana</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>3. ¿Por qué los lípidos son una forma eficiente de almacenamiento de energía en los organismos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q3" value="a"><span> Tienen un alto contenido calórico</span></label>
+                        <label><input type="checkbox" name="q3" value="b"><span> Representan una forma compacta de almacenamiento</span></label>
+                        <label><input type="checkbox" name="q3" value="c"><span> Son anhidros, por lo que no añaden peso por agua</span></label>
+                        <label><input type="checkbox" name="q3" value="d"><span> Se oxidan más rápido que los carbohidratos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>4. ¿Cuáles de los siguientes componentes se encuentran comúnmente en las membranas biológicas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q4" value="a"><span> Proteínas hidrofóbicas con estructura α-hélice</span></label>
+                        <label><input type="checkbox" name="q4" value="b"><span> Proteínas integrales</span></label>
+                        <label><input type="checkbox" name="q4" value="c"><span> Glicoproteínas</span></label>
+                        <label><input type="checkbox" name="q4" value="d"><span> Glicolípidos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>5. ¿Qué propiedad de los lípidos de membrana les permite formar bicapas espontáneamente en medio acuoso?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q5" value="a"><span> Su naturaleza anfipática</span></label>
+                        <label><input type="checkbox" name="q5" value="b"><span> Su completa hidrofobicidad</span></label>
+                        <label><input type="checkbox" name="q5" value="c"><span> Su completa hidrofilicidad</span></label>
+                        <label><input type="checkbox" name="q5" value="d"><span> Su capacidad para formar puentes de hidrógeno con el agua</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ácidos grasos -->
+        <div class="section topic" id="acidos-grasos">
+            <h2><span class="kawaii-icon">🔍</span>Ácidos Grasos</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Los ácidos grasos insaturados más comunes incluyen el ácido palmitoleico (cis-9-hexadecenoico). En plantas y bacterias, los ácidos grasos pueden ser más complejos, incluyendo ácidos grasos ramificados como el ácido tuberculoestéxico (10-metil octadecanoico) presente en Mycobacterium sp. Otros ejemplos incluyen ácidos grasos dimetilados en Bacillus sp. y ácidos como el micolipénico, micoceránico, micocerósico y fitánico en Mycobacterium sp.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>6. ¿Cuáles de los siguientes son ácidos grasos insaturados comunes?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q6" value="a"><span> Ácido palmitoleico (cis-9-hexadecenoico)</span></label>
+                        <label><input type="checkbox" name="q6" value="b"><span> Ácido esteárico (18:0)</span></label>
+                        <label><input type="checkbox" name="q6" value="c"><span> Ácido linoleico (18:2)</span></label>
+                        <label><input type="checkbox" name="q6" value="d"><span> Ácido palmítico (16:0)</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>7. María está investigando sobre Mycobacterium tuberculosis para su tesis. ¿Qué tipos de ácidos grasos ramificados debería esperar encontrar en esta bacteria?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q7" value="a"><span> Ácido tuberculoestéxico (10-metil octadecanoico)</span></label>
+                        <label><input type="checkbox" name="q7" value="b"><span> Ácido micolipénico (2,4,6-trimetil-trans-2-tetracosenoico)</span></label>
+                        <label><input type="checkbox" name="q7" value="c"><span> Ácido micoceránico (2,4,6-trimetil octacosanoico)</span></label>
+                        <label><input type="checkbox" name="q7" value="d"><span> Ácido oleico (18:1 cis-9)</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>8. ¿En qué organismos son especialmente importantes los ácidos grasos ramificados?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q8" value="a"><span> Plantas</span></label>
+                        <label><input type="checkbox" name="q8" value="b"><span> Bacterias</span></label>
+                        <label><input type="checkbox" name="q8" value="c"><span> Animales superiores</span></label>
+                        <label><input type="checkbox" name="q8" value="d"><span> Hongos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>9. ¿Qué función tiene el ácido tuberculoestéxico en Xanthomonas campestris?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q9" value="a"><span> Regula la virulencia</span></label>
+                        <label><input type="checkbox" name="q9" value="b"><span> Actúa como reserva energética</span></label>
+                        <label><input type="checkbox" name="q9" value="c"><span> Forma parte de la pared celular</span></label>
+                        <label><input type="checkbox" name="q9" value="d"><span> Participa en la fotosíntesis</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>10. ¿Dónde se localiza específicamente el ácido tuberculoestéxico en Mycobacterium sp.?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q10" value="a"><span> En la posición sn-2 del fosfatidil inositol manosido</span></label>
+                        <label><input type="checkbox" name="q10" value="b"><span> En el citoplasma como reserva energética</span></label>
+                        <label><input type="checkbox" name="q10" value="c"><span> En la membrana externa</span></label>
+                        <label><input type="checkbox" name="q10" value="d"><span> En los ribosomas</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Propiedades de los ácidos grasos -->
+        <div class="section topic" id="propiedades">
+            <h2><span class="kawaii-icon">📊</span>Propiedades de los Ácidos Grasos</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Los ácidos grasos tienen solubilidad en solventes orgánicos. Su estructura influye en el punto de fusión: los ácidos grasos saturados tienen puntos de fusión más altos que los insaturados, y los ácidos grasos trans tienen puntos de fusión más altos que los cis. La oxidación de lípidos depende de factores como la cantidad de oxígeno, grado de instauración, presencia de antioxidantes o prooxidantes, temperatura y exposición a la luz. El proceso de oxidación incluye etapas de iniciación, propagación y terminación.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>11. ¿Cuáles de los siguientes factores afectan la velocidad de oxidación de los lípidos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q11" value="a"><span> Cantidad de oxígeno presente</span></label>
+                        <label><input type="checkbox" name="q11" value="b"><span> Grado de instauración</span></label>
+                        <label><input type="checkbox" name="q11" value="c"><span> Presencia de antioxidantes o prooxidantes</span></label>
+                        <label><input type="checkbox" name="q11" value="d"><span> Temperatura de almacenamiento</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>12. Carlos trabaja en una empresa de aceites vegetales y necesita prolongar la vida útil del producto. ¿Qué medidas debería tomar para reducir la oxidación de los lípidos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q12" value="a"><span> Reducir la exposición al oxígeno mediante envases herméticos</span></label>
+                        <label><input type="checkbox" name="q12" value="b"><span> Añadir antioxidantes naturales como vitamina E</span></label>
+                        <label><input type="checkbox" name="q12" value="c"><span> Almacenar a bajas temperaturas</span></label>
+                        <label><input type="checkbox" name="q12" value="d"><span> Exponer el producto a la luz directa para activar los antioxidantes</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>13. ¿Cuáles son las etapas del proceso de oxidación de lípidos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q13" value="a"><span> Iniciación</span></label>
+                        <label><input type="checkbox" name="q13" value="b"><span> Propagación</span></label>
+                        <label><input type="checkbox" name="q13" value="c"><span> Terminación</span></label>
+                        <label><input type="checkbox" name="q13" value="d"><span> Hidrólisis</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>14. ¿Cómo afecta el grado de instauración al punto de fusión de los ácidos grasos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q14" value="a"><span> Los ácidos grasos insaturados tienen puntos de fusión más bajos</span></label>
+                        <label><input type="checkbox" name="q14" value="b"><span> Los ácidos grasos saturados tienen puntos de fusión más altos</span></label>
+                        <label><input type="checkbox" name="q14" value="c"><span> Los ácidos grasos trans tienen puntos de fusión más altos que los cis</span></label>
+                        <label><input type="checkbox" name="q14" value="d"><span> El número de dobles enlaces no afecta el punto de fusión</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>15. ¿Qué ocurre durante la etapa de iniciación de la oxidación lipídica?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q15" value="a"><span> Se sustrae hidrógeno de un lípido insaturado para producir un radical lipídico</span></label>
+                        <label><input type="checkbox" name="q15" value="b"><span> Se forman peróxidos lipídicos</span></label>
+                        <label><input type="checkbox" name="q15" value="c"><span> Los radicales reaccionan entre sí para producir productos no reactivos</span></label>
+                        <label><input type="checkbox" name="q15" value="d"><span> Se consume oxígeno molecular</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Acilglicéridos -->
+        <div class="section topic" id="acilgliceridos">
+            <h2><span class="kawaii-icon">🧪</span>Acilglicéridos</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Los acilglicéridos son ésteres de ácidos grasos con glicerol (alcohol trihídrico). Incluyen monoacilglicéridos, diacilglicéridos, triacilglicéridos (simples y mixtos) y éteres alquilacilglicéridos. La grasa de la leche es un ejemplo de mezcla compleja con 223 especies moleculares individuales. Los triacilglicéridos pueden hidrolizarse mediante hidrólisis alcalina o enzimática (lipasa pancreática).</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>16. ¿Cuáles de los siguientes son tipos de acilglicéridos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q16" value="a"><span> Monoacilglicéridos</span></label>
+                        <label><input type="checkbox" name="q16" value="b"><span> Diacilglicéridos</span></label>
+                        <label><input type="checkbox" name="q16" value="c"><span> Triacilglicéridos</span></label>
+                        <label><input type="checkbox" name="q16" value="d"><span> Éteres alquilacilglicéridos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>17. Ana está estudiando nutrición y quiere entender por qué los aceites vegetales son líquidos a temperatura ambiente mientras que las grasas animales son sólidas. ¿Qué diferencias en los acilglicéridos explicarían esta observación?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q17" value="a"><span> Los aceites vegetales contienen más ácidos grasos insaturados</span></label>
+                        <label><input type="checkbox" name="q17" value="b"><span> Las grasas animales contienen más ácidos grasos saturados</span></label>
+                        <label><input type="checkbox" name="q17" value="c"><span> La longitud de la cadena de ácidos grasos influye en el punto de fusión</span></label>
+                        <label><input type="checkbox" name="q17" value="d"><span> Los aceites vegetales tienen mayor contenido de agua</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>18. ¿Qué enzima participa en la hidrólisis enzimática de los triacilglicéridos en el sistema digestivo humano?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q18" value="a"><span> Lipasa pancreática</span></label>
+                        <label><input type="checkbox" name="q18" value="b"><span> Amilasa</span></label>
+                        <label><input type="checkbox" name="q18" value="c"><span> Tripsina</span></label>
+                        <label><input type="checkbox" name="q18" value="d"><span> Pepsina</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>19. ¿Qué productos se obtienen de la hidrólisis alcalina de los triacilglicéridos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q19" value="a"><span> Sales sódicas de ácidos grasos (jabones)</span></label>
+                        <label><input type="checkbox" name="q19" value="b"><span> Glicerol</span></label>
+                        <label><input type="checkbox" name="q19" value="c"><span> Monoacilglicéridos</span></label>
+                        <label><input type="checkbox" name="q19" value="d"><span> Agua</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>20. ¿Qué caracteriza a un triacilglicérido mixto?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q20" value="a"><span> Contiene diferentes tipos de ácidos grasos en sus posiciones</span></label>
+                        <label><input type="checkbox" name="q20" value="b"><span> Todos sus ácidos grasos son idénticos</span></label>
+                        <label><input type="checkbox" name="q20" value="c"><span> Es soluble en agua</span></label>
+                        <label><input type="checkbox" name="q20" value="d"><span> No puede ser hidrolizado</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fosfoglicéridos -->
+        <div class="section topic" id="fosfogliceridos">
+            <h2><span class="kawaii-icon">🔬</span>Fosfoglicéridos</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Los fosfoglicéridos son derivados del sn-glicero-3-fosfórico que contienen al menos un residuo O-acil, O-alquil o O-alquenil unido al glicerol y una cabeza polar. Incluyen fosfatidilcolina, fosfatidiletanolamina (cefalina), fosfatidilserina, fosfatidilglicerol y difosfatidilglicerol (cardiolipina). Los plasmalógenos son éteres de glicerol especialmente abundantes en membranas del retículo sarcoplásmico. El factor activador de plaquetas (PAF) es un plasmalógeno de colina con ácido acético en C2.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>21. ¿Cuáles de los siguientes son ejemplos de fosfoglicéridos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q21" value="a"><span> Fosfatidilcolina</span></label>
+                        <label><input type="checkbox" name="q21" value="b"><span> Fosfatidiletanolamina (cefalina)</span></label>
+                        <label><input type="checkbox" name="q21" value="c"><span> Fosfatidilserina</span></label>
+                        <label><input type="checkbox" name="q21" value="d"><span> Cardiolipina (difosfatidilglicerol)</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>22. Un investigador está estudiando membranas mitocondriales y encuentra altas concentraciones de un fosfolípido particular. ¿Cuál es probablemente este fosfolípido y dónde más es abundante?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q22" value="a"><span> Cardiolipina, abundante en la membrana interna mitocondrial</span></label>
+                        <label><input type="checkbox" name="q22" value="b"><span> Cardiolipina, también abundante en membranas bacterianas</span></label>
+                        <label><input type="checkbox" name="q22" value="c"><span> Fosfatidilcolina, principal componente de membranas celulares</span></label>
+                        <label><input type="checkbox" name="q22" value="d"><span> Fosfatidilinositol, importante en señalización celular</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>23. ¿Qué caracteriza a los plasmalógenos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q23" value="a"><span> Son éteres de glicerol</span></label>
+                        <label><input type="checkbox" name="q23" value="b"><span> Tienen un enlace éter en la posición sn-1</span></label>
+                        <label><input type="checkbox" name="q23" value="c"><span> Son especialmente abundantes en membranas del retículo sarcoplásmico</span></label>
+                        <label><input type="checkbox" name="q23" value="d"><span> Siempre contienen colina como grupo de cabeza</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>24. ¿Qué función tiene el fosfatidilinositol en la señalización celular?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q24" value="a"><span> Al ser hidrolizado por fosfolipasa D, libera inositol fosfato</span></label>
+                        <label><input type="checkbox" name="q24" value="b"><span> El inositol fosfato actúa como segundo mensajero en la acción hormonal</span></label>
+                        <label><input type="checkbox" name="q24" value="c"><span> Participa en la transducción de señales intracelulares</span></label>
+                        <label><input type="checkbox" name="q24" value="d"><span> Es el principal componente estructural de todas las membranas</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>25. ¿Qué es el factor activador de plaquetas (PAF)?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q25" value="a"><span> Un plasmalógeno de colina</span></label>
+                        <label><input type="checkbox" name="q25" value="b"><span> Tiene ácido acético en lugar de un ácido graso en C2</span></label>
+                        <label><input type="checkbox" name="q25" value="c"><span> Participa en procesos inflamatorios y agregación plaquetaria</span></label>
+                        <label><input type="checkbox" name="q25" value="d"><span> Es un tipo de esfingolípido</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Esfingolípidos -->
+        <div class="section topic" id="esfingolipidos">
+            <h2><span class="kawaii-icon">🌟</span>Esfingolípidos</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Los esfingolípidos están compuestos por esfingosina, un alcohol nitrogenado con cadena hidrocarbonada de 15 carbonos. La esfingosina N-sustituída forma cerámidos (análogos a diacilglicéridos). Se clasifican en: 1) Fosfoesfingolípidos (esfingomielinas) - ceramida esterificada con ácido fosfórico unido a alcoholes nitrogenados; 2) Glicoesfingolípidos - ceramida unida mediante enlace β-glicosídico a monosacáridos (cerebrósidos) u oligosacáridos (gangliósidos). Los esfingolípidos participan en reconocimiento celular y son abundantes en tejido nervioso.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>26. ¿Cuáles de las siguientes afirmaciones sobre los esfingolípidos son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q26" value="a"><span> Están compuestos por esfingosina, un alcohol nitrogenado</span></label>
+                        <label><input type="checkbox" name="q26" value="b"><span> La esfingosina N-sustituída forma cerámidos</span></label>
+                        <label><input type="checkbox" name="q26" value="c"><span> Son análogos a los diacilglicéridos</span></label>
+                        <label><input type="checkbox" name="q26" value="d"><span> Son especialmente abundantes en tejido nervioso</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>27. Un paciente presenta síntomas neurológicos y en el análisis se detecta acumulación de esfingolípidos en las células nerviosas. ¿Qué tipo de esfingolípidos podrían estar involucrados en esta condición?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q27" value="a"><span> Gangliósidos, que son glicoesfingolípidos complejos</span></label>
+                        <label><input type="checkbox" name="q27" value="b"><span> Cerebrósidos, que contienen un solo monosacárido</span></label>
+                        <label><input type="checkbox" name="q27" value="c"><span> Esfingomielinas, que son fosfoesfingolípidos</span></label>
+                        <label><input type="checkbox" name="q27" value="d"><span> Fosfatidilcolina, que es un fosfoglicérido</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>28. ¿Cómo se clasifican los esfingolípidos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q28" value="a"><span> Fosfoesfingolípidos (esfingomielinas)</span></label>
+                        <label><input type="checkbox" name="q28" value="b"><span> Glicoesfingolípidos (cerebrósidos y gangliósidos)</span></label>
+                        <label><input type="checkbox" name="q28" value="c"><span> Acilglicéridos</span></label>
+                        <label><input type="checkbox" name="q28" value="d"><span> Fosfoglicéridos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>29. ¿Qué función tienen los gangliósidos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q29" value="a"><span> Participan en el reconocimiento celular</span></label>
+                        <label><input type="checkbox" name="q29" value="b"><span> Actúan como receptores de toxinas bacterianas</span></label>
+                        <label><input type="checkbox" name="q29" value="c"><span> Son componentes importantes de las membranas sinápticas</span></label>
+                        <label><input type="checkbox" name="q29" value="d"><span> Son la principal reserva energética del organismo</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>30. ¿Qué diferencia a los cerebrósidos de los gangliósidos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q30" value="a"><span> Los cerebrósidos contienen un solo monosacárido</span></label>
+                        <label><input type="checkbox" name="q30" value="b"><span> Los gangliósidos contienen oligosacáridos complejos</span></label>
+                        <label><input type="checkbox" name="q30" value="c"><span> Los cerebrósidos son fosfoesfingolípidos</span></label>
+                        <label><input type="checkbox" name="q30" value="d"><span> Los gangliósidos siempre contienen ácido siálico</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Solucionario -->
+        <div class="answer-key" id="solucionario">
+            <h2><span class="kawaii-icon">📝</span>Solucionario</h2>
+            <div class="answer">
+                <h3>Respuestas correctas:</h3>
+                <p><strong>Pregunta 1:</strong> a, c</p>
+                <p class="answer-explanation">Las membranas biológicas están formadas por lípidos anfipáticos que forman bicapas en medio acuoso y contienen colesterol como componente importante. No es cierto que solo contengan lípidos (también tienen proteínas) ni que los lípidos sean completamente hidrofóbicos (son anfipáticos).</p>
+                
+                <p><strong>Pregunta 2:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Un modelo preciso de membrana celular debe incluir fosfolípidos formando una bicapa, proteínas integrales, colesterol que modula la fluidez, y glicolípidos en la cara externa.</p>
+                
+                <p><strong>Pregunta 3:</strong> a, b, c</p>
+                <p class="answer-explanation">Los lípidos son eficientes para almacenar energía porque tienen alto contenido calórico, son compactos y anhidros. No es cierto que se oxiden más rápido que los carbohidratos.</p>
+                
+                <p><strong>Pregunta 4:</strong> b, c, d</p>
+                <p class="answer-explanation">Las membranas biológicas contienen proteínas integrales, glicoproteínas y glicolípidos. Las proteínas de membrana no son necesariamente hidrofóbicas con estructura α-hélice.</p>
+                
+                <p><strong>Pregunta 5:</strong> a</p>
+                <p class="answer-explanation">La naturaleza anfipática de los lípidos (con regiones hidrofílicas e hidrofóbicas) les permite formar bicapas espontáneamente en medio acuoso.</p>
+                
+                <p><strong>Pregunta 6:</strong> a, c</p>
+                <p class="answer-explanation">El ácido palmitoleico y el linoleico son ácidos grasos insaturados. El esteárico y palmítico son saturados.</p>
+                
+                <p><strong>Pregunta 7:</strong> a, b, c</p>
+                <p class="answer-explanation">Mycobacterium tuberculosis contiene ácidos grasos ramificados como tuberculoestéxico, micolipénico y micoceránico. El ácido oleico es un ácido graso insaturado común, no específico de esta bacteria.</p>
+                
+                <p><strong>Pregunta 8:</strong> a, b</p>
+                <p class="answer-explanation">Los ácidos grasos ramificados son especialmente importantes en plantas y bacterias.</p>
+                
+                <p><strong>Pregunta 9:</strong> a</p>
+                <p class="answer-explanation">En Xanthomonas campestris, el ácido tuberculoestéxico regula la virulencia.</p>
+                
+                <p><strong>Pregunta 10:</strong> a</p>
+                <p class="answer-explanation">En Mycobacterium sp., el ácido tuberculoestéxico se localiza en la posición sn-2 del fosfatidil inositol manosido.</p>
+                
+                <p><strong>Pregunta 11:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todos estos factores afectan la velocidad de oxidación de los lípidos.</p>
+                
+                <p><strong>Pregunta 12:</strong> a, b, c</p>
+                <p class="answer-explanation">Para reducir la oxidación, se debe reducir la exposición al oxígeno, añadir antioxidantes y almacenar a bajas temperaturas. Exponer a la luz directa aceleraría la oxidación.</p>
+                
+                <p><strong>Pregunta 13:</strong> a, b, c</p>
+                <p class="answer-explanation">Las etapas de la oxidación lipídica son iniciación, propagación y terminación. La hidrólisis es un proceso diferente.</p>
+                
+                <p><strong>Pregunta 14:</strong> a, b, c</p>
+                <p class="answer-explanation">Los ácidos grasos insaturados tienen puntos de fusión más bajos que los saturados, y los trans tienen puntos de fusión más altos que los cis. El número de dobles enlaces sí afecta el punto de fusión.</p>
+                
+                <p><strong>Pregunta 15:</strong> a</p>
+                <p class="answer-explanation">En la etapa de iniciación se sustrae hidrógeno de un lípido insaturado para producir un radical lipídico.</p>
+                
+                <p><strong>Pregunta 16:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todos estos son tipos de acilglicéridos.</p>
+                
+                <p><strong>Pregunta 17:</strong> a, b, c</p>
+                <p class="answer-explanation">Los aceites vegetales son líquidos porque contienen más ácidos grasos insaturados, mientras que las grasas animales son sólidas por su mayor contenido de saturados. La longitud de cadena también influye. El contenido de agua no es la razón principal.</p>
+                
+                <p><strong>Pregunta 18:</strong> a</p>
+                <p class="answer-explanation">La lipasa pancreática es la enzima que hidroliza los triacilglicéridos en el sistema digestivo humano.</p>
+                
+                <p><strong>Pregunta 19:</strong> a, b</p>
+                <p class="answer-explanation">La hidrólisis alcalina produce sales sódicas de ácidos grasos (jabones) y glicerol.</p>
+                
+                <p><strong>Pregunta 20:</strong> a</p>
+                <p class="answer-explanation">Un triacilglicérido mixto contiene diferentes tipos de ácidos grasos en sus posiciones.</p>
+                
+                <p><strong>Pregunta 21:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todos estos son ejemplos de fosfoglicéridos.</p>
+                
+                <p><strong>Pregunta 22:</strong> a, b</p>
+                <p class="answer-explanation">La cardiolipina es abundante en la membrana interna mitocondrial y también en membranas bacterianas.</p>
+                
+                <p><strong>Pregunta 23:</strong> a, b, c</p>
+                <p class="answer-explanation">Los plasmalógenos son éteres de glicerol con enlace éter en sn-1, abundantes en membranas del retículo sarcoplásmico. No siempre contienen colina.</p>
+                
+                <p><strong>Pregunta 24:</strong> b, c</p>
+                <p class="answer-explanation">El fosfatidilinositol participa en señalización celular: al ser hidrolizado libera inositol fosfato que actúa como segundo mensajero. No es hidrolizado por fosfolipasa D ni es el principal componente estructural.</p>
+                
+                <p><strong>Pregunta 25:</strong> a, b, c</p>
+                <p class="answer-explanation">El PAF es un plasmalógeno de colina con ácido acético en C2, que participa en procesos inflamatorios. No es un esfingolípido.</p>
+                
+                <p><strong>Pregunta 26:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todas las afirmaciones sobre los esfingolípidos son correctas.</p>
+                
+                <p><strong>Pregunta 27:</strong> a, b, c</p>
+                <p class="answer-explanation">Los gangliósidos, cerebrósidos y esfingomielinas son esfingolípidos que pueden acumularse en enfermedades neurológicas. La fosfatidilcolina es un fosfoglicérido.</p>
+                
+                <p><strong>Pregunta 28:</strong> a, b</p>
+                <p class="answer-explanation">Los esfingolípidos se clasifican en fosfoesfingolípidos (esfingomielinas) y glicoesfingolípidos (cerebrósidos y gangliósidos).</p>
+                
+                <p><strong>Pregunta 29:</strong> a, b, c</p>
+                <p class="answer-explanation">Los gangliósidos participan en reconocimiento celular, actúan como receptores de toxinas y son componentes de membranas sinápticas. No son reserva energética.</p>
+                
+                <p><strong>Pregunta 30:</strong> a, b, d</p>
+                <p class="answer-explanation">Los cerebrósidos contienen un solo monosacárido, mientras que los gangliósidos contienen oligosacáridos complejos con ácido siálico. Ambos son glicoesfingolípidos, no fosfoesfingolípidos.</p>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button onclick="checkAnswers()">Verificar respuestas</button>
+            <button onclick="resetQuiz()">Reiniciar cuestionario</button>
+            <button class="home-button" onclick="window.location.href='lipidos_1.html'">Volver a Inicio</button>
+        </div>
+    </div>
+    
+    <script>
+        function checkAnswers() {
+            const correctAnswers = {
+                q1: ['a', 'c'],
+                q2: ['a', 'b', 'c', 'd'],
+                q3: ['a', 'b', 'c'],
+                q4: ['b', 'c', 'd'],
+                q5: ['a'],
+                q6: ['a', 'c'],
+                q7: ['a', 'b', 'c'],
+                q8: ['a', 'b'],
+                q9: ['a'],
+                q10: ['a'],
+                q11: ['a', 'b', 'c', 'd'],
+                q12: ['a', 'b', 'c'],
+                q13: ['a', 'b', 'c'],
+                q14: ['a', 'b', 'c'],
+                q15: ['a'],
+                q16: ['a', 'b', 'c', 'd'],
+                q17: ['a', 'b', 'c'],
+                q18: ['a'],
+                q19: ['a', 'b'],
+                q20: ['a'],
+                q21: ['a', 'b', 'c', 'd'],
+                q22: ['a', 'b'],
+                q23: ['a', 'b', 'c'],
+                q24: ['b', 'c'],
+                q25: ['a', 'b', 'c'],
+                q26: ['a', 'b', 'c', 'd'],
+                q27: ['a', 'b', 'c'],
+                q28: ['a', 'b'],
+                q29: ['a', 'b', 'c'],
+                q30: ['a', 'b', 'd']
+            };
+            
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            
+            for (const question in correctAnswers) {
+                const selected = [];
+                const checkboxes = document.querySelectorAll(`input[name="${question}"]:checked`);
+                
+                checkboxes.forEach(checkbox => {
+                    selected.push(checkbox.value);
+                });
+                
+                // Verificar si las respuestas seleccionadas coinciden con las correctas
+                const correct = correctAnswers[question];
+                const isCorrect = selected.length === correct.length && 
+                                 selected.every(value => correct.includes(value));
+                
+                if (isCorrect) {
+                    score++;
+                }
+            }
+            
+            alert(`Has acertado ${score} de ${totalQuestions} preguntas (${Math.round(score/totalQuestions*100)}%)`);
+        }
+        
+        function resetQuiz() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+        }
+    </script>
+</body>
+</html>

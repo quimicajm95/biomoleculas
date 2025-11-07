@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio Kawaii: Estructura Terciaria y Cuaternaria de Proteínas</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #fff5f7;
+            color: #555;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-top: 80px;
+        }
+        h1 {
+            text-align: center;
+            color: #ff85a2;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #ff85a2;
+            border-bottom: 2px dashed #ffc2d1;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #ff9ebb;
+        }
+        .section {
+            background-color: #fff0f5;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #ffc2d1;
+            scroll-margin-top: 100px;
+        }
+        .kawaii-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        .question {
+            background-color: #fff9fb;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #ff85a2;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .options label:hover {
+            background-color: #ffe4ec;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .options input {
+            margin-right: 8px;
+        }
+        .answer-key {
+            background-color: #e8f4f8;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 2px solid #a2d2ff;
+        }
+        .answer-key h2 {
+            color: #a2d2ff;
+            border-bottom: 2px dashed #bde0fe;
+        }
+        .answer-explanation {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+        }
+        button {
+            background-color: #ff85a2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff6b9d;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header-img {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header-img img {
+            max-width: 200px;
+        }
+        .topic {
+            margin-bottom: 30px;
+        }
+        
+        /* Barra de navegación */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffc2d1;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #ff4d7a;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links li {
+            margin-left: 20px;
+        }
+        .nav-links a {
+            color: #ff4d7a;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #ff85a2;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Efectos para las opciones seleccionadas */
+        .options input:checked + span {
+            font-weight: bold;
+            color: #ff4d7a;
+        }
+        .options label:has(input:checked) {
+            background-color: #ffd6e0;
+            border: 2px solid #ff85a2;
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(255, 133, 162, 0.3);
+        }
+        
+        /* Animación suave al desplazarse */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Botones de acción */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .home-button {
+            background-color: #a2d2ff;
+        }
+        .home-button:hover {
+            background-color: #7fbfff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🏠</span>
+                Inicio
+            </a>
+            <ul class="nav-links">
+                <li><a href="#introduccion">Introducción</a></li>
+                <li><a href="#terciaria">Estructura Terciaria</a></li>
+                <li><a href="#dominios">Dominios</a></li>
+                <li><a href="#cuaternaria">Estructura Cuaternaria</a></li>
+                <li><a href="#fibrosas">Proteínas Fibrosas</a></li>
+                <li><a href="#solucionario">Solucionario</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="header-img">
+            <div style="font-size: 4em;">🧬🌸</div>
+        </div>
+        <h1>Estructura Terciaria y Cuaternaria de Proteínas</h1>
+        
+        <!-- Introducción -->
+        <div class="section topic" id="introduccion">
+            <h2><span class="kawaii-icon">📚</span>Introducción</h2>
+            
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Las proteínas presentan cuatro niveles de organización estructural: primaria, secundaria, terciaria y cuaternaria. La estructura terciaria se refiere al plegamiento completo de la cadena polipeptídica para asumir una forma tridimensional, mientras que la estructura cuaternaria describe la interacción entre dos o más cadenas polipeptídicas (subunidades). La función de una proteína depende directamente de su estructura tridimensional, que está determinada por su secuencia de aminoácidos.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>1. ¿Cuáles de las siguientes afirmaciones sobre los niveles de organización de las proteínas son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q1" value="a"><span> La estructura terciaria se refiere al plegamiento completo de la cadena polipeptídica</span></label>
+                        <label><input type="checkbox" name="q1" value="b"><span> La estructura cuaternaria implica la interacción entre dos o más cadenas polipeptídicas</span></label>
+                        <label><input type="checkbox" name="q1" value="c"><span> La estructura secundaria determina la función específica de la proteína</span></label>
+                        <label><input type="checkbox" name="q1" value="d"><span> La estructura primaria contiene información para determinar la estructura tridimensional</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>2. ¿Cuáles son las consideraciones generales sobre la estructura tridimensional de las proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q2" value="a"><span> La estructura tridimensional está determinada por la secuencia de aminoácidos</span></label>
+                        <label><input type="checkbox" name="q2" value="b"><span> La función de una proteína depende de su estructura tridimensional</span></label>
+                        <label><input type="checkbox" name="q2" value="c"><span> Las estructuras proteicas son todas iguales entre diferentes proteínas</span></label>
+                        <label><input type="checkbox" name="q2" value="d"><span> Las interacciones covalentes son las más importantes para estabilizar la estructura</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>3. En relación con la localización de residuos en proteínas globulares, ¿cuáles afirmaciones son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q3" value="a"><span> Los residuos no polares suelen localizarse en el interior de la proteína</span></label>
+                        <label><input type="checkbox" name="q3" value="b"><span> Los residuos polares con carga se sitúan generalmente en la superficie</span></label>
+                        <label><input type="checkbox" name="q3" value="c"><span> Los grupos polares sin carga siempre están en la superficie</span></label>
+                        <label><input type="checkbox" name="q3" value="d"><span> Los residuos hidrofóbicos evitan el contacto con el solvente acuoso</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>4. ¿Qué tipos de enlaces estabilizan la estructura terciaria de las proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q4" value="a"><span> Enlaces covalentes como los puentes disulfuro</span></label>
+                        <label><input type="checkbox" name="q4" value="b"><span> Interacciones iónicas</span></label>
+                        <label><input type="checkbox" name="q4" value="c"><span> Interacciones hidrofóbicas</span></label>
+                        <label><input type="checkbox" name="q4" value="d"><span> Puentes de hidrógeno y fuerzas de Van der Waals</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>5. Un investigador está estudiando una proteína que pierde su función cuando se calienta. Al analizarla, descubre que su estructura tridimensional se ha desorganizado, pero la secuencia de aminoácidos permanece intacta. Este fenómeno, conocido como desnaturalización, ilustra la importancia de:</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q5" value="a"><span> La relación entre estructura tridimensional y función proteica</span></label>
+                        <label><input type="checkbox" name="q5" value="b"><span> La estabilidad de las interacciones no covalentes que mantienen la estructura</span></label>
+                        <label><input type="checkbox" name="q5" value="c"><span> La independencia entre secuencia primaria y estructura terciaria</span></label>
+                        <label><input type="checkbox" name="q5" value="d"><span> La importancia de la estructura cuaternaria para todas las proteínas</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Estructura terciaria -->
+        <div class="section topic" id="terciaria">
+            <h2><span class="kawaii-icon">🔬</span>Estructura Terciaria</h2>
+            
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>La estructura terciaria es la organización estructural completa que adopta la cadena polipeptídica en el espacio, combinando diferentes elementos secundarios y segmentos no ordenados para originar un conjunto ordenado. Está estabilizada principalmente por interacciones débiles no covalentes, siendo el efecto hidrofóbico la fuerza conductora del plegamiento. Los residuos no polares tienden a localizarse en el interior de la proteína, mientras que los residuos polares con carga se sitúan en la superficie en contacto con el solvente acuoso.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>6. ¿Cuáles son características de la estructura terciaria de las proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q6" value="a"><span> Es la organización estructural completa de la cadena polipeptídica en el espacio</span></label>
+                        <label><input type="checkbox" name="q6" value="b"><span> Combina diferentes elementos de estructura secundaria</span></label>
+                        <label><input type="checkbox" name="q6" value="c"><span> Incluye segmentos no ordenados</span></label>
+                        <label><input type="checkbox" name="q6" value="d"><span> Solo está presente en proteínas con estructura cuaternaria</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>7. Sobre el efecto hidrofóbico en el plegamiento proteico, ¿cuáles afirmaciones son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q7" value="a"><span> Es la tendencia de los grupos hidrofóbicos para asociarse entre sí</span></label>
+                        <label><input type="checkbox" name="q7" value="b"><span> Constituye la fuerza conductora del plegamiento proteico</span></label>
+                        <label><input type="checkbox" name="q7" value="c"><span> Los residuos no polares tienden a localizarse en el interior de la proteína</span></label>
+                        <label><input type="checkbox" name="q7" value="d"><span> Los residuos polares se orientan hacia el interior de la proteína</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>8. ¿Qué tipos de interacciones estabilizan la estructura terciaria?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q8" value="a"><span> Interacciones hidrofóbicas</span></label>
+                        <label><input type="checkbox" name="q8" value="b"><span> Puentes de hidrógeno</span></label>
+                        <label><input type="checkbox" name="q8" value="c"><span> Fuerzas de Van der Waals</span></label>
+                        <label><input type="checkbox" name="q8" value="d"><span> Enlaces iónicos y puentes disulfuro</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>9. En relación con la localización de residuos en proteínas globulares, ¿cuáles afirmaciones son verdaderas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q9" value="a"><span> Val, Leu, Ile, Met y Phe aparecen casi siempre en el interior</span></label>
+                        <label><input type="checkbox" name="q9" value="b"><span> Arg, His, Lys, Asp y Glu se sitúan en la superficie</span></label>
+                        <label><input type="checkbox" name="q9" value="c"><span> Los grupos polares sin carga siempre están en el interior</span></label>
+                        <label><input type="checkbox" name="q9" value="d"><span> Los residuos en el interior forman puentes de hidrógeno internos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>10. En el diseño de fármacos, es crucial entender la estructura terciaria de las proteínas diana. Un equipo farmacéutico está desarrollando un medicamento que debe unirse a un sitio específico de una enzima implicada en una enfermedad. Considerando la estructura terciaria, ¿qué características deberían buscar en el sitio de unión?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q10" value="a"><span> Cavidades o surcos accesibles en la superficie de la proteína</span></label>
+                        <label><input type="checkbox" name="q10" value="b"><span> Residuos específicos que puedan formar interacciones con el fármaco</span></label>
+                        <label><input type="checkbox" name="q10" value="c"><span> Regiones con alta densidad de residuos hidrofóbicos en la superficie</span></label>
+                        <label><input type="checkbox" name="q10" value="d"><span> Estructuras secundarias específicas como hélices alfa o hojas beta</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dominios -->
+        <div class="section topic" id="dominios">
+            <h2><span class="kawaii-icon">🌀</span>Dominios Proteicos</h2>
+            
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Los dominios son unidades globulares plegadas de manera compacta, independientes estructural y funcionalmente, que poseen las características estructurales de una proteína globular pequeña. Cada dominio puede contener más de 100 aminoácidos y presenta su propio arreglo espacial. Los dominios forman parte de una misma cadena polipeptídica y solo pueden separarse mediante la ruptura del enlace peptídico con proteasas, a diferencia de las subunidades que se mantienen unidas por interacciones débiles.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>11. ¿Cuáles son características de los dominios proteicos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q11" value="a"><span> Son unidades globulares plegadas de manera compacta</span></label>
+                        <label><input type="checkbox" name="q11" value="b"><span> Son independientes estructural y funcionalmente</span></label>
+                        <label><input type="checkbox" name="q11" value="c"><span> Cada dominio posee su propio arreglo espacial</span></label>
+                        <label><input type="checkbox" name="q11" value="d"><span> Siempre están formados por cadenas polipeptídicas diferentes</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>12. ¿Cómo se diferencian los dominios de las subunidades?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q12" value="a"><span> Los dominios forman parte de una misma cadena polipeptídica</span></label>
+                        <label><input type="checkbox" name="q12" value="b"><span> Las subunidades son cadenas polipeptídicas separadas</span></label>
+                        <label><input type="checkbox" name="q12" value="c"><span> Los dominios se separan rompiendo enlaces peptídicos</span></label>
+                        <label><input type="checkbox" name="q12" value="d"><span> Las subunidades se mantienen unidas por interacciones débiles</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>13. Sobre el tamaño y composición de los dominios, ¿cuáles afirmaciones son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q13" value="a"><span> Pueden tener un contenido superior a 100 aminoácidos</span></label>
+                        <label><input type="checkbox" name="q13" value="b"><span> Cada unidad posee su propio arreglo espacial</span></label>
+                        <label><input type="checkbox" name="q13" value="c"><span> Siempre corresponden a estructuras secundarias específicas</span></label>
+                        <label><input type="checkbox" name="q13" value="d"><span> Pueden estar unidos por segmentos de cadena flexible</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>14. ¿Qué proteínas presentan dominios en su estructura?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q14" value="a"><span> Pepsina</span></label>
+                        <label><input type="checkbox" name="q14" value="b"><span> Anticuerpos</span></label>
+                        <label><input type="checkbox" name="q14" value="c"><span> Hemoglobina</span></label>
+                        <label><input type="checkbox" name="q14" value="d"><span> Todas las proteínas globulares</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>15. En bioingeniería de proteínas, los científicos a menudo diseñan proteínas quiméricas combinando dominios de diferentes proteínas. Si un investigador quiere crear una proteína con una nueva función combinando dominios, ¿qué consideraciones debe tener en cuenta?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q15" value="a"><span> La compatibilidad estructural entre los dominios a fusionar</span></label>
+                        <label><input type="checkbox" name="q15" value="b"><span> La preservación de la función independiente de cada dominio</span></label>
+                        <label><input type="checkbox" name="q15" value="c"><span> La longitud y flexibilidad del conector entre dominios</span></label>
+                        <label><input type="checkbox" name="q15" value="d"><span> La posibilidad de interacciones no deseadas entre dominios</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Estructura cuaternaria -->
+        <div class="section topic" id="cuaternaria">
+            <h2><span class="kawaii-icon">📄</span>Estructura Cuaternaria</h2>
+            
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>La estructura cuaternaria designa el arreglo espacial que se manifiesta cuando la molécula contiene varias subunidades, cada una con su estructura terciaria propia. Las proteínas pueden ser monoméricas (una cadena) o multiméricas (varias cadenas). Los multímeros pueden ser homotípicos (subunidades idénticas) o heterotípicos (subunidades diferentes). Las uniones entre subunidades son específicas y complementarias mediante interacciones débiles, principalmente el efecto hidrofóbico. La estructura cuaternaria permite propiedades como la cooperatividad y la co-localización de funciones.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>16. ¿Cuáles son características de la estructura cuaternaria?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q16" value="a"><span> Implica la interacción de dos o más cadenas polipeptídicas</span></label>
+                        <label><input type="checkbox" name="q16" value="b"><span> Cada subunidad tiene su propia estructura terciaria</span></label>
+                        <label><input type="checkbox" name="q16" value="c"><span> Las uniones entre subunidades son específicas y complementarias</span></label>
+                        <label><input type="checkbox" name="q16" value="d"><span> Solo existe en proteínas fibrosas</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>17. Sobre la clasificación de proteínas según su estructura cuaternaria, ¿cuáles afirmaciones son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q17" value="a"><span> Las proteínas monoméricas tienen solo estructura terciaria</span></label>
+                        <label><input type="checkbox" name="q17" value="b"><span> Los homomultímeros tienen subunidades idénticas</span></label>
+                        <label><input type="checkbox" name="q17" value="c"><span> Los heteromultímeros tienen diferentes tipos de subunidades</span></label>
+                        <label><input type="checkbox" name="q17" value="d"><span> Un dímero es un multímero con dos subunidades</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>18. ¿Qué fuerzas estabilizan la estructura cuaternaria?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q18" value="a"><span> Efecto hidrofóbico</span></label>
+                        <label><input type="checkbox" name="q18" value="b"><span> Interacciones electrostáticas</span></label>
+                        <label><input type="checkbox" name="q18" value="c"><span> Enlaces de hidrógeno</span></label>
+                        <label><input type="checkbox" name="q18" value="d"><span> Enlaces covalentes (en algunos casos)</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>19. ¿Cuáles son las importancias biológicas de la estructura cuaternaria?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q19" value="a"><span> Permite la cooperatividad en la función</span></label>
+                        <label><input type="checkbox" name="q19" value="b"><span> Facilita la co-localización de funciones</span></label>
+                        <label><input type="checkbox" name="q19" value="c"><span> Permite la combinación de subunidades para funciones versátiles</span></label>
+                        <label><input type="checkbox" name="q19" value="d"><span> Siempre aumenta el tamaño molecular sin beneficio funcional</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>20. La hemoglobina es una proteína tetramérica crucial para el transporte de oxígeno en la sangre. En pacientes con anemia de células falciformes, una mutación en la hemoglobina causa su agregación anormal. ¿Qué aspectos de la estructura cuaternaria explican por qué esta mutación es tan perjudicial?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q20" value="a"><span> La alteración de las interacciones entre subunidades</span></label>
+                        <label><input type="checkbox" name="q20" value="b"><span> El cambio en la cooperatividad en la unión al oxígeno</span></label>
+                        <label><input type="checkbox" name="q20" value="c"><span> La formación de fibras por agregación de tetrámeros</span></label>
+                        <label><input type="checkbox" name="q20" value="d"><span> La pérdida de la capacidad de cambiar entre conformaciones</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Proteínas fibrosas -->
+        <div class="section topic" id="fibrosas">
+            <h2><span class="kawaii-icon">🔄</span>Proteínas Fibrosas</h2>
+            
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Las proteínas fibrosas tienen función estructural y en su estructura predominan un tipo de estructura secundaria. Son insolubles en agua y se extienden principalmente en una dimensión. Existen tres tipos principales: alfa-queratinas (con hélices alfa y puentes disulfuro), beta-queratinas y fibroína (con hojas beta), y colágeno (con triple hélice particular). Cada tipo presenta propiedades mecánicas especiales determinadas por su secuencia y estructura secundaria predominante.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>21. ¿Cuáles son características generales de las proteínas fibrosas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q21" value="a"><span> Tienen función estructural</span></label>
+                        <label><input type="checkbox" name="q21" value="b"><span> Predomina un tipo de estructura secundaria</span></label>
+                        <label><input type="checkbox" name="q21" value="c"><span> Son insolubles en agua</span></label>
+                        <label><input type="checkbox" name="q21" value="d"><span> Se extienden principalmente en una dimensión</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>22. Sobre los tipos de proteínas fibrosas, ¿cuáles afirmaciones son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q22" value="a"><span> Las alfa-queratinas tienen hélices alfa con puentes disulfuro</span></label>
+                        <label><input type="checkbox" name="q22" value="b"><span> La fibroína de la seda tiene estructura en hoja beta</span></label>
+                        <label><input type="checkbox" name="q22" value="c"><span> El colágeno tiene una triple hélice particular</span></label>
+                        <label><input type="checkbox" name="q22" value="d"><span> Todas las proteínas fibrosas tienen la misma estructura secundaria</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>23. ¿Qué características estructurales presenta la fibroína de la seda?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q23" value="a"><span> Tiene regiones cristalinas con secuencias repetitivas</span></label>
+                        <label><input type="checkbox" name="q23" value="b"><span> Presenta residuos pequeños como Gly, Ala, Ser</span></label>
+                        <label><input type="checkbox" name="q23" value="c"><span> Está estabilizada por una extensa red de puentes de hidrógeno</span></label>
+                        <label><input type="checkbox" name="q23" value="d"><span> Es muy flexible pero no se estira fácilmente</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>24. Sobre la estructura del colágeno, ¿cuáles afirmaciones son verdaderas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q24" value="a"><span> Presenta una secuencia repetitiva Gly-X-Y</span></label>
+                        <label><input type="checkbox" name="q24" value="b"><span> Forma una triple hélice levógira</span></label>
+                        <label><input type="checkbox" name="q24" value="c"><span> La glicina es importante para mantener la fortaleza estructural</span></label>
+                        <label><input type="checkbox" name="q24" value="d"><span> Las triple hélices se asocian en estructuras supramoleculares</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>25. En medicina regenerativa, se utilizan andamios de colágeno para reparar tejidos dañados. Un equipo de investigación está desarrollando un material para regenerar tendones basado en la estructura del colágeno. ¿Qué propiedades del colágeno lo hacen ideal para esta aplicación?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q25" value="a"><span> Elevada fuerza de tensión sin romperse</span></label>
+                        <label><input type="checkbox" name="q25" value="b"><span> Biocompatibilidad y capacidad de integración tisular</span></label>
+                        <label><input type="checkbox" name="q25" value="c"><span> Estructura fibrilar que imita la matriz extracelular natural</span></label>
+                        <label><input type="checkbox" name="q25" value="d"><span> Capacidad de formar redes tridimensionales estables</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Solucionario -->
+        <div class="answer-key" id="solucionario">
+            <h2><span class="kawaii-icon">✅</span>Solucionario</h2>
+            <p>Aquí puedes verificar tus respuestas y entender por qué son correctas o incorrectas.</p>
+            
+            <div class="answer-item">
+                <h3>Pregunta 1</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, d</p>
+                <p class="answer-explanation">La estructura secundaria no determina por sí sola la función específica de la proteína; es la estructura terciaria la que define la función.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 2</h3>
+                <p><strong>Respuestas correctas:</strong> a, b</p>
+                <p class="answer-explanation">Las estructuras proteicas no son todas iguales (cada proteína tiene estructura única) y las interacciones no covalentes son las más importantes para estabilizar la estructura.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 3</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, d</p>
+                <p class="answer-explanation">Los grupos polares sin carga pueden estar tanto en el interior como en la superficie, formando puentes de hidrógeno internos o con el solvente.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 4</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todos estos tipos de enlaces contribuyen a estabilizar la estructura terciaria de las proteínas.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 5</h3>
+                <p><strong>Respuestas correctas:</strong> a, b</p>
+                <p class="answer-explanation">La desnaturalización ilustra la relación entre estructura y función, y la importancia de las interacciones no covalentes. La secuencia primaria sí determina la estructura terciaria, y no todas las proteínas tienen estructura cuaternaria.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 6</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">La estructura terciaria existe en proteínas monoméricas y multiméricas, no solo en aquellas con estructura cuaternaria.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 7</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">Los residuos polares tienden a orientarse hacia la superficie, no hacia el interior de la proteína.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 8</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todas estas interacciones contribuyen a estabilizar la estructura terciaria.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 9</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, d</p>
+                <p class="answer-explanation">Los grupos polares sin carga pueden estar tanto en el interior como en la superficie, no siempre en el interior.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 10</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, d</p>
+                <p class="answer-explanation">Las regiones con alta densidad de residuos hidrofóbicos suelen estar en el interior de la proteína, no en la superficie accesible para fármacos.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 11</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">Los dominios forman parte de una misma cadena polipeptídica, no necesariamente de cadenas diferentes.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 12</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todas estas son diferencias clave entre dominios y subunidades.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 13</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, d</p>
+                <p class="answer-explanation">Los dominios no siempre corresponden a estructuras secundarias específicas; pueden combinar diferentes elementos estructurales.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 14</h3>
+                <p><strong>Respuestas correctas:</strong> a, b</p>
+                <p class="answer-explanation">La pepsina y los anticuerpos son ejemplos de proteínas con dominios. No todas las proteínas globulares presentan dominios claramente definidos.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 15</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todas estas consideraciones son importantes al diseñar proteínas quiméricas con dominios fusionados.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 16</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">La estructura cuaternaria existe tanto en proteínas fibrosas como globulares.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 17</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todas estas afirmaciones sobre la clasificación de proteínas son correctas.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 18</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todas estas fuerzas contribuyen a estabilizar la estructura cuaternaria, aunque los enlaces covalentes son menos comunes.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 19</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">La estructura cuaternaria siempre confiere beneficios funcionales, no solo aumenta el tamaño molecular.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 20</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todas estas alteraciones en la estructura cuaternaria contribuyen a la patología de la anemia de células falciformes.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 21</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todas estas son características definitorias de las proteínas fibrosas.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 22</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">Las proteínas fibrosas tienen diferentes tipos de estructura secundaria predominante, no todas tienen la misma.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 23</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todas estas son características de la fibroína de la seda.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 24</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todas estas afirmaciones sobre la estructura del colágeno son correctas.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 25</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todas estas propiedades del colágeno lo hacen ideal para aplicaciones en medicina regenerativa.</p>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button onclick="checkAnswers()">Verificar respuestas</button>
+            <button onclick="resetAnswers()">Reiniciar respuestas</button>
+            <a href="index.html" style="text-decoration: none;">
+                <button class="home-button">Volver al Inicio</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            const correctAnswers = {
+                q1: ['a', 'b', 'd'],
+                q2: ['a', 'b'],
+                q3: ['a', 'b', 'd'],
+                q4: ['a', 'b', 'c', 'd'],
+                q5: ['a', 'b'],
+                q6: ['a', 'b', 'c'],
+                q7: ['a', 'b', 'c'],
+                q8: ['a', 'b', 'c', 'd'],
+                q9: ['a', 'b', 'd'],
+                q10: ['a', 'b', 'd'],
+                q11: ['a', 'b', 'c'],
+                q12: ['a', 'b', 'c', 'd'],
+                q13: ['a', 'b', 'd'],
+                q14: ['a', 'b'],
+                q15: ['a', 'b', 'c', 'd'],
+                q16: ['a', 'b', 'c'],
+                q17: ['a', 'b', 'c', 'd'],
+                q18: ['a', 'b', 'c', 'd'],
+                q19: ['a', 'b', 'c'],
+                q20: ['a', 'b', 'c', 'd'],
+                q21: ['a', 'b', 'c', 'd'],
+                q22: ['a', 'b', 'c'],
+                q23: ['a', 'b', 'c', 'd'],
+                q24: ['a', 'b', 'c', 'd'],
+                q25: ['a', 'b', 'c', 'd']
+            };
+            
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            
+            for (const question in correctAnswers) {
+                const selectedOptions = Array.from(document.querySelectorAll(`input[name="${question}"]:checked`)).map(input => input.value);
+                const correctOptions = correctAnswers[question];
+                
+                // Verificar si las respuestas seleccionadas coinciden exactamente con las correctas
+                if (selectedOptions.length === correctOptions.length && 
+                    selectedOptions.every(option => correctOptions.includes(option))) {
+                    score++;
+                }
+            }
+            
+            alert(`Has acertado ${score} de ${totalQuestions} preguntas. ¡Revisa el solucionario para más detalles!`);
+            
+            // Desplazarse al solucionario
+            document.getElementById('solucionario').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function resetAnswers() {
+            const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+            allCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            alert('Todas las respuestas han sido reiniciadas.');
+        }
+    </script>
+</body>
+</html>

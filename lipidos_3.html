@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio Kawaii de Lípidos III</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #fff5f7;
+            color: #555;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-top: 80px;
+        }
+        h1 {
+            text-align: center;
+            color: #ff85a2;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #ff85a2;
+            border-bottom: 2px dashed #ffc2d1;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #ff9ebb;
+        }
+        .section {
+            background-color: #fff0f5;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #ffc2d1;
+            scroll-margin-top: 100px;
+        }
+        .kawaii-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        .question {
+            background-color: #fff9fb;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #ff85a2;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .options label:hover {
+            background-color: #ffe4ec;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .options input {
+            margin-right: 8px;
+        }
+        .answer-key {
+            background-color: #e8f4f8;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 2px solid #a2d2ff;
+        }
+        .answer-key h2 {
+            color: #a2d2ff;
+            border-bottom: 2px dashed #bde0fe;
+        }
+        .answer-explanation {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+        }
+        button {
+            background-color: #ff85a2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff6b9d;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header-img {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header-img img {
+            max-width: 200px;
+        }
+        .topic {
+            margin-bottom: 30px;
+        }
+        
+        /* Barra de navegación */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffc2d1;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #ff4d7a;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links li {
+            margin-left: 20px;
+        }
+        .nav-links a {
+            color: #ff4d7a;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #ff85a2;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Efectos para las opciones seleccionadas */
+        .options input:checked + span {
+            font-weight: bold;
+            color: #ff4d7a;
+        }
+        .options label:has(input:checked) {
+            background-color: #ffd6e0;
+            border: 2px solid #ff85a2;
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(255, 133, 162, 0.3);
+        }
+        
+        /* Animación suave al desplazarse */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Botones de acción */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .home-button {
+            background-color: #a2d2ff;
+        }
+        .home-button:hover {
+            background-color: #7fbfff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="lipidos_1.html" class="logo">
+                <span class="logo-icon">🏠</span>
+                Inicio
+            </a>
+            <ul class="nav-links">
+                <li><a href="#introduccion">Introducción</a></li>
+                <li><a href="#esfingolipidos">Esfingolípidos</a></li>
+                <li><a href="#glicoesfingolipidos">Glicoesfingolípidos</a></li>
+                <li><a href="#terpenos">Terpenos</a></li>
+                <li><a href="#esteroides">Esteroides</a></li>
+                <li><a href="#lipoproteinas">Lipoproteínas</a></li>
+                <li><a href="#solucionario">Solucionario</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="header-img">
+            <div style="font-size: 4em;">🧪🌸</div>
+        </div>
+        <h1>Estudio Kawaii de Lípidos III</h1>
+        
+        <!-- Introducción -->
+        <div class="section topic" id="introduccion">
+            <h2><span class="kawaii-icon">📚</span>Introducción</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Esta conferencia se enfoca en tres temas principales: Glicoesfingolípidos, Lípidos simples (Terpenos y Esteroides), y Lipoproteínas. Los lípidos se clasifican en simples (insaponificables) que incluyen ácidos grasos, terpenos, esteroides y eicosanoides; y complejos (saponificables) que incluyen acilglicéridos, fosfoglicéridos, esfingolípidos y ceras.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>1. ¿Cuáles de las siguientes afirmaciones sobre la clasificación de lípidos son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q1" value="a"><span> Los lípidos simples son insaponificables</span></label>
+                        <label><input type="checkbox" name="q1" value="b"><span> Los lípidos complejos son saponificables</span></label>
+                        <label><input type="checkbox" name="q1" value="c"><span> Los terpenos pertenecen a los lípidos simples</span></label>
+                        <label><input type="checkbox" name="q1" value="d"><span> Los esfingolípidos son lípidos complejos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>2. María está estudiando para un examen de bioquímica y necesita recordar la clasificación de lípidos. ¿Qué ejemplos de lípidos simples debería incluir en su estudio?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q2" value="a"><span> Terpenos</span></label>
+                        <label><input type="checkbox" name="q2" value="b"><span> Esteroides</span></label>
+                        <label><input type="checkbox" name="q2" value="c"><span> Eicosanoides</span></label>
+                        <label><input type="checkbox" name="q2" value="d"><span> Fosfoglicéridos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>3. ¿Cuáles de los siguientes son componentes comunes de las membranas biológicas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q3" value="a"><span> Glicoproteínas</span></label>
+                        <label><input type="checkbox" name="q3" value="b"><span> Glicolípidos</span></label>
+                        <label><input type="checkbox" name="q3" value="c"><span> Proteínas integrales</span></label>
+                        <label><input type="checkbox" name="q3" value="d"><span> Colesterol</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>4. ¿Qué caracteriza a los lípidos insaponificables?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q4" value="a"><span> No forman jabones al reaccionar con bases</span></label>
+                        <label><input type="checkbox" name="q4" value="b"><span> Generalmente no contienen ácidos grasos en su estructura</span></label>
+                        <label><input type="checkbox" name="q4" value="c"><span> Incluyen terpenos y esteroides</span></label>
+                        <label><input type="checkbox" name="q4" value="d"><span> Son siempre polares y solubles en agua</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>5. ¿Qué función tienen las proteínas periféricas en las membranas biológicas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q5" value="a"><span> Se asocian débilmente con la superficie de la membrana</span></label>
+                        <label><input type="checkbox" name="q5" value="b"><span> Atraviesan completamente la bicapa lipídica</span></label>
+                        <label><input type="checkbox" name="q5" value="c"><span> Pueden tener funciones enzimáticas o de señalización</span></label>
+                        <label><input type="checkbox" name="q5" value="d"><span> Son siempre glicosiladas</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Esfingolípidos -->
+        <div class="section topic" id="esfingolipidos">
+            <h2><span class="kawaii-icon">🔬</span>Esfingolípidos</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Los esfingolípidos están compuestos por esfingosina, un alcohol nitrogenado con cadena hidrocarbonada de 15 carbonos. La esfingosina tiene analogía estructural con un monoacilglicerol. Cuando la esfingosina está N-sustituída forma cerámicos o ceramidas, que son análogos a diacilglicéridos. Los esfingolípidos se clasifican en fosfoesfingolípidos (ceramida esterificada con ácido fosfórico unido a alcoholes nitrogenados) y glicoesfingolípidos (ceramida unida mediante enlace β-glicosídico a monosacáridos u oligosacáridos).</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>6. ¿Cuáles de las siguientes afirmaciones sobre los esfingolípidos son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q6" value="a"><span> Están compuestos por esfingosina, un alcohol nitrogenado</span></label>
+                        <label><input type="checkbox" name="q6" value="b"><span> La esfingosina tiene una cadena hidrocarbonada de 15 carbonos</span></label>
+                        <label><input type="checkbox" name="q6" value="c"><span> Los cerámicos son análogos a los diacilglicéridos</span></label>
+                        <label><input type="checkbox" name="q6" value="d"><span> Siempre contienen grupos fosfato en su estructura</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>7. Un investigador está estudiando enfermedades de almacenamiento lisosomal y encuentra que un paciente tiene acumulación de esfingomielina. ¿Qué enzima podría estar deficiente en este caso?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q7" value="a"><span> Esfingomielinasa</span></label>
+                        <label><input type="checkbox" name="q7" value="b"><span> Glucocerebrosidasa</span></label>
+                        <label><input type="checkbox" name="q7" value="c"><span> Hexosaminidasa A</span></label>
+                        <label><input type="checkbox" name="q7" value="d"><span> Lipasa ácida</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>8. ¿Cómo se clasifican los esfingolípidos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q8" value="a"><span> Fosfoesfingolípidos</span></label>
+                        <label><input type="checkbox" name="q8" value="b"><span> Glicoesfingolípidos</span></label>
+                        <label><input type="checkbox" name="q8" value="c"><span> Fosfoglicéridos</span></label>
+                        <label><input type="checkbox" name="q8" value="d"><span> Acilglicéridos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>9. ¿Qué es un cerámido?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q9" value="a"><span> Esfingosina N-sustituída con un ácido graso</span></label>
+                        <label><input type="checkbox" name="q9" value="b"><span> Un análogo estructural de los diacilglicéridos</span></label>
+                        <label><input type="checkbox" name="q9" value="c"><span> La unidad estructural básica de los esfingolípidos</span></label>
+                        <label><input type="checkbox" name="q9" value="d"><span> Un tipo de fosfolípido derivado del glicerol</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>10. ¿Qué caracteriza a los fosfoesfingolípidos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q10" value="a"><span> Ceramida esterificada con ácido fosfórico</span></label>
+                        <label><input type="checkbox" name="q10" value="b"><span> El ácido fosfórico se une a alcoholes nitrogenados</span></label>
+                        <label><input type="checkbox" name="q10" value="c"><span> Incluyen las esfingomielinas</span></label>
+                        <label><input type="checkbox" name="q10" value="d"><span> Forman parte del grupo de los fosfolípidos</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Glicoesfingolípidos -->
+        <div class="section topic" id="glicoesfingolipidos">
+            <h2><span class="kawaii-icon">🍬</span>Glicoesfingolípidos</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Los glicoesfingolípidos están formados por una ceramida unida mediante enlace β-glicosídico a un monosacárido (cerebrósidos) u oligosacárido. Los cerebrósidos más abundantes contienen glucosa o galactosa. Otros monosacáridos presentes incluyen L-fucosa, N-acetilglucosamina, N-acetilgalactosamina y ácido siálico. Los azúcares pueden estar esterificados con grupos sulfato formando sulfátidos. La ceramida suele contener ácidos grasos de cadena muy larga como lignocérico (24:0), nervónico (24:1) o cerebrónico. Existen hasta 130 variedades distintas que participan en funciones de reconocimiento celular como antígenos de grupos sanguíneos, receptores de bacterias y virus, y marcadores tumorales.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>11. ¿Cuáles de las siguientes afirmaciones sobre los glicoesfingolípidos son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q11" value="a"><span> La ceramida se une a azúcares mediante enlace β-glicosídico</span></label>
+                        <label><input type="checkbox" name="q11" value="b"><span> Los cerebrósidos contienen un solo monosacárido</span></label>
+                        <label><input type="checkbox" name="q11" value="c"><span> Pueden contener ácido siálico en su estructura</span></label>
+                        <label><input type="checkbox" name="q11" value="d"><span> Siempre tienen grupos fosfato</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>12. Un equipo de investigación está desarrollando una nueva terapia contra el cáncer dirigida al gangliósido N-glicolil GM3. ¿Por qué este gangliósido es un objetivo atractivo para la inmunoterapia?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q12" value="a"><span> Es un marcador molecular de ciertas células tumorales</span></label>
+                        <label><input type="checkbox" name="q12" value="b"><span> No se expresa en tejidos humanos normales</span></label>
+                        <label><input type="checkbox" name="q12" value="c"><span> Su expresión se asocia con comportamiento biológico más agresivo en cáncer de pulmón</span></label>
+                        <label><input type="checkbox" name="q12" value="d"><span> Es esencial para la supervivencia de todas las células</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>13. ¿Qué son los sulfátidos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q13" value="a"><span> Glicoesfingolípidos con grupos sulfato esterificados</span></label>
+                        <label><input type="checkbox" name="q13" value="b"><span> También conocidos como sulfolípidos</span></label>
+                        <label><input type="checkbox" name="q13" value="c"><span> Derivados de cerebrósidos sulfatados</span></label>
+                        <label><input type="checkbox" name="q13" value="d"><span> Un tipo de fosfoesfingolípido</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>14. ¿Qué ácidos grasos son característicos de los glicoesfingolípidos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q14" value="a"><span> Ácido lignocérico (24:0)</span></label>
+                        <label><input type="checkbox" name="q14" value="b"><span> Ácido nervónico (24:1)</span></label>
+                        <label><input type="checkbox" name="q14" value="c"><span> Ácido cerebrónico</span></label>
+                        <label><input type="checkbox" name="q14" value="d"><span> Ácido palmítico (16:0)</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>15. ¿Qué funciones tienen los glicoesfingolípidos en las membranas celulares?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q15" value="a"><span> Reconocimiento celular</span></label>
+                        <label><input type="checkbox" name="q15" value="b"><span> Actúan como antígenos de grupos sanguíneos</span></label>
+                        <label><input type="checkbox" name="q15" value="c"><span> Sirven como receptores para bacterias y virus</span></label>
+                        <label><input type="checkbox" name="q15" value="d"><span> Son marcadores tumorales</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Terpenos -->
+        <div class="section topic" id="terpenos">
+            <h2><span class="kawaii-icon">🌿</span>Terpenos</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Los terpenos son lípidos simples derivados de la unidad isoprénica (2-metil-1,3-butadieno). Se clasifican según el número de unidades isoprénicas: monoterpenos (2 unidades) como geraniol, limoneno y mentol; sesquiterpenos (3 unidades) como farnesol; diterpenos (4 unidades) como fitol; triterpenos (6 unidades) como escualeno; y tetraterpenos (8 unidades) como carotenos. Los carotenoides son derivados octaprenoides que constituyen pigmentos vegetales, siendo el β-caroteno un precursor del retinal (provitamina A). Los dolicoles son compuestos poliprenoides no vitamínicos de cadena muy larga (80-100 átomos de C) que intervienen en la síntesis de oligosacáridos de glicoproteínas.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>16. ¿Cuáles de las siguientes afirmaciones sobre los terpenos son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q16" value="a"><span> Se derivan de la unidad isoprénica</span></label>
+                        <label><input type="checkbox" name="q16" value="b"><span> Son lípidos simples insaponificables</span></label>
+                        <label><input type="checkbox" name="q16" value="c"><span> Se clasifican según el número de unidades isoprénicas</span></label>
+                        <label><input type="checkbox" name="q16" value="d"><span> Siempre contienen nitrógeno en su estructura</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>17. Un nutricionista recomienda a sus pacientes consumir zanahorias por su contenido en β-caroteno. ¿Por qué es importante este compuesto para la salud humana?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q17" value="a"><span> Es un precursor del retinal (provitamina A)</span></label>
+                        <label><input type="checkbox" name="q17" value="b"><span> Actúa como antioxidante</span></label>
+                        <label><input type="checkbox" name="q17" value="c"><span> Es esencial para la visión</span></label>
+                        <label><input type="checkbox" name="q17" value="d"><span> Participa en la síntesis de hormonas esteroideas</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>18. ¿Cómo se clasifican los terpenos según el número de unidades isoprénicas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q18" value="a"><span> Monoterpenos (2 unidades)</span></label>
+                        <label><input type="checkbox" name="q18" value="b"><span> Sesquiterpenos (3 unidades)</span></label>
+                        <label><input type="checkbox" name="q18" value="c"><span> Diterpenos (4 unidades)</span></label>
+                        <label><input type="checkbox" name="q18" value="d"><span> Tetraterpenos (8 unidades)</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>19. ¿Qué son los dolicoles?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q19" value="a"><span> Compuestos poliprenoides de cadena muy larga</span></label>
+                        <label><input type="checkbox" name="q19" value="b"><span> Intervienen en la síntesis de oligosacáridos de glicoproteínas</span></label>
+                        <label><input type="checkbox" name="q19" value="c"><span> Aparecen como ésteres fosfóricos (dolicolfosfato)</span></label>
+                        <label><input type="checkbox" name="q19" value="d"><span> Son vitaminas liposolubles</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>20. ¿Qué ejemplos de terpenos son correctos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q20" value="a"><span> Geraniol (monoterpeno)</span></label>
+                        <label><input type="checkbox" name="q20" value="b"><span> Farnesol (sesquiterpeno)</span></label>
+                        <label><input type="checkbox" name="q20" value="c"><span> Fitol (diterpeno)</span></label>
+                        <label><input type="checkbox" name="q20" value="d"><span> Escualeno (triterpeno)</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Esteroides -->
+        <div class="section topic" id="esteroides">
+            <h2><span class="kawaii-icon">⭐</span>Esteroides</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Los esteroides son lípidos simples derivados del ciclopentanoperhidrofenantreno (esterno), un sistema de cuatro ciclos formado a partir del escualeno. Se distinguen por el grado de saturación, cadenas laterales y grupos funcionales. Se clasifican en: esteroles (como colesterol en animales, fitosteroles en plantas y micosteroles en hongos), ácidos y sales biliares, y hormonas esteroideas. El colesterol es ampliamente distribuido en animales, frecuentemente esterificado a ácidos grasos, y es precursor de calciferoles, hormonas esteroideas y ácidos biliares. Los esteroles regulan la fluidez de las membranas plasmáticas en eucariotas.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>21. ¿Cuáles de las siguientes afirmaciones sobre los esteroides son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q21" value="a"><span> Se derivan del ciclopentanoperhidrofenantreno</span></label>
+                        <label><input type="checkbox" name="q21" value="b"><span> Se forman a partir del escualeno</span></label>
+                        <label><input type="checkbox" name="q21" value="c"><span> Son lípidos simples insaponificables</span></label>
+                        <label><input type="checkbox" name="q21" value="d"><span> Siempre contienen grupos fosfato</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>22. Un paciente con hipercolesterolemia está recibiendo asesoramiento nutricional. ¿Qué información correcta sobre el colesterol debería incluir el nutricionista?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q22" value="a"><span> El colesterol es precursor de hormonas esteroideas</span></label>
+                        <label><input type="checkbox" name="q22" value="b"><span> Regula la fluidez de las membranas celulares</span></label>
+                        <label><input type="checkbox" name="q22" value="c"><span> El organismo animal no puede degradar su sistema de anillos</span></label>
+                        <label><input type="checkbox" name="q22" value="d"><span> Se excreta como tal o convertido en ácidos biliares</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>23. ¿Cómo se clasifican los esteroides?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q23" value="a"><span> Esteroles</span></label>
+                        <label><input type="checkbox" name="q23" value="b"><span> Ácidos y sales biliares</span></label>
+                        <label><input type="checkbox" name="q23" value="c"><span> Hormonas esteroideas</span></label>
+                        <label><input type="checkbox" name="q23" value="d"><span> Fosfolípidos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>24. ¿Qué caracteriza a los esteroles?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q24" value="a"><span> Tienen un grupo OH en posición β en el C3</span></label>
+                        <label><input type="checkbox" name="q24" value="b"><span> Tienen una cadena lateral de 8 carbonos en el C17</span></label>
+                        <label><input type="checkbox" name="q24" value="c"><span> Se encuentran en la membrana plasmática de eucariotas</span></label>
+                        <label><input type="checkbox" name="q24" value="d"><span> Regulan la fluidez de la bicapa lipídica</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>25. ¿Qué ejemplos de esteroles son correctos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q25" value="a"><span> Colesterol (animales)</span></label>
+                        <label><input type="checkbox" name="q25" value="b"><span> Estigmasterol (plantas)</span></label>
+                        <label><input type="checkbox" name="q25" value="c"><span> Ergosterol (levaduras y hongos)</span></label>
+                        <label><input type="checkbox" name="q25" value="d"><span> Sitosterol (plantas)</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Lipoproteínas -->
+        <div class="section topic" id="lipoproteinas">
+            <h2><span class="kawaii-icon">🚚</span>Lipoproteínas</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Las lipoproteínas son complejos macromoleculares que transportan lípidos en la sangre. Tienen una estructura general con un núcleo hidrofóbico que contiene triacilgliceroles y ésteres de colesterol, y una superficie hidrofílica formada por fosfolípidos, colesterol libre y apoproteínas. Las principales clases de lipoproteínas humanas son: quilomicrones (densidad <1.006 g/mL), VLDL (0.95-1.006 g/mL), LDL (1.006-1.063 g/mL) y HDL (1.063-1.210 g/mL). Cada clase tiene composición y funciones específicas en el transporte de lípidos.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>26. ¿Cuáles de las siguientes afirmaciones sobre las lipoproteínas son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q26" value="a"><span> Transportan lípidos en la sangre</span></label>
+                        <label><input type="checkbox" name="q26" value="b"><span> Tienen un núcleo hidrofóbico con triacilgliceroles</span></label>
+                        <label><input type="checkbox" name="q26" value="c"><span> Su superficie está formada por fosfolípidos y apoproteínas</span></label>
+                        <label><input type="checkbox" name="q26" value="d"><span> Son siempre esféricas y del mismo tamaño</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>27. Un paciente recibe resultados de laboratorio que muestran niveles elevados de LDL. ¿Qué información correcta sobre las LDL debería proporcionar el médico?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q27" value="a"><span> Tienen densidad entre 1.006-1.063 g/mL</span></label>
+                        <label><input type="checkbox" name="q27" value="b"><span> Contienen aproximadamente 23% de proteína</span></label>
+                        <label><input type="checkbox" name="q27" value="c"><span> Transportan colesterol a los tejidos periféricos</span></label>
+                        <label><input type="checkbox" name="q27" value="d"><span> Niveles elevados se asocian con mayor riesgo cardiovascular</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>28. ¿Cuáles son las principales clases de lipoproteínas humanas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q28" value="a"><span> Quilomicrones</span></label>
+                        <label><input type="checkbox" name="q28" value="b"><span> VLDL (lipoproteínas de muy baja densidad)</span></label>
+                        <label><input type="checkbox" name="q28" value="c"><span> LDL (lipoproteínas de baja densidad)</span></label>
+                        <label><input type="checkbox" name="q28" value="d"><span> HDL (lipoproteínas de alta densidad)</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>29. ¿Qué componentes forman la superficie de las lipoproteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q29" value="a"><span> Fosfolípidos</span></label>
+                        <label><input type="checkbox" name="q29" value="b"><span> Colesterol libre</span></label>
+                        <label><input type="checkbox" name="q29" value="c"><span> Apoproteínas</span></label>
+                        <label><input type="checkbox" name="q29" value="d"><span> Triacilgliceroles</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>30. ¿Qué caracteriza a las HDL?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q30" value="a"><span> Tienen la mayor densidad (1.063-1.210 g/mL)</span></label>
+                        <label><input type="checkbox" name="q30" value="b"><span> Contienen aproximadamente 55% de proteína</span></label>
+                        <label><input type="checkbox" name="q30" value="c"><span> Transportan colesterol desde tejidos periféricos al hígado</span></label>
+                        <label><input type="checkbox" name="q30" value="d"><span> Se consideran "colesterol bueno"</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button onclick="checkAnswers()">Comprobar respuestas</button>
+            <button onclick="resetQuiz()">Reiniciar cuestionario</button>
+            <button class="home-button" onclick="window.location.href='lipidos_1.html'">Volver a Lípidos I</button>
+        </div>
+        
+        <div class="answer-key" id="solucionario" style="display:none;">
+            <h2><span class="kawaii-icon">📝</span>Solucionario</h2>
+            <div id="answers"></div>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            // Respuestas correctas
+            const correctAnswers = {
+                q1: ['a', 'b', 'c', 'd'],
+                q2: ['a', 'b', 'c'],
+                q3: ['a', 'b', 'c', 'd'],
+                q4: ['a', 'b', 'c'],
+                q5: ['a', 'c'],
+                q6: ['a', 'b', 'c'],
+                q7: ['a'],
+                q8: ['a', 'b'],
+                q9: ['a', 'b', 'c'],
+                q10: ['a', 'b', 'c', 'd'],
+                q11: ['a', 'b', 'c'],
+                q12: ['a', 'b', 'c'],
+                q13: ['a', 'b', 'c'],
+                q14: ['a', 'b', 'c'],
+                q15: ['a', 'b', 'c', 'd'],
+                q16: ['a', 'b', 'c'],
+                q17: ['a', 'b', 'c'],
+                q18: ['a', 'b', 'c', 'd'],
+                q19: ['a', 'b', 'c'],
+                q20: ['a', 'b', 'c', 'd'],
+                q21: ['a', 'b', 'c'],
+                q22: ['a', 'b', 'c', 'd'],
+                q23: ['a', 'b', 'c'],
+                q24: ['a', 'b', 'c', 'd'],
+                q25: ['a', 'b', 'c', 'd'],
+                q26: ['a', 'b', 'c'],
+                q27: ['a', 'b', 'c', 'd'],
+                q28: ['a', 'b', 'c', 'd'],
+                q29: ['a', 'b', 'c'],
+                q30: ['a', 'b', 'c', 'd']
+            };
+            
+            // Fundamentos de las respuestas
+            const answerExplanations = {
+                q1: "Los lípidos simples son insaponificables y los complejos son saponificables. Los terpenos pertenecen a los lípidos simples y los esfingolípidos a los complejos.",
+                q2: "Los lípidos simples incluyen terpenos, esteroides y eicosanoides. Los fosfoglicéridos son lípidos complejos.",
+                q3: "Todos estos componentes son comunes en las membranas biológicas.",
+                q4: "Los lípidos insaponificables no forman jabones, generalmente no contienen ácidos grasos e incluyen terpenos y esteroides. No son siempre polares.",
+                q5: "Las proteínas periféricas se asocian débilmente con la superficie de la membrana y pueden tener funciones enzimáticas o de señalización. No siempre atraviesan la bicapa ni son siempre glicosiladas.",
+                q6: "Los esfingolípidos están compuestos por esfingosina con cadena de 15 carbonos, y los cerámicos son análogos a diacilglicéridos. No todos contienen grupos fosfato.",
+                q7: "La enfermedad de Niemann-Pick implica deficiencia de esfingomielinasa y acumulación de esfingomielina.",
+                q8: "Los esfingolípidos se clasifican en fosfoesfingolípidos y glicoesfingolípidos.",
+                q9: "Un cerámido es esfingosina N-sustituída con un ácido graso, análogo a diacilglicéridos y unidad básica de esfingolípidos. No es derivado del glicerol.",
+                q10: "Los fosfoesfingolípidos tienen ceramida esterificada con ácido fosfórico unido a alcoholes nitrogenados, incluyen esfingomielinas y forman parte de los fosfolípidos.",
+                q11: "Los glicoesfingolípidos tienen ceramida unida a azúcares mediante enlace β-glicosídico, los cerebrósidos contienen un monosacárido y pueden contener ácido siálico. No siempre tienen grupos fosfato.",
+                q12: "El gangliósido N-glicolil GM3 es marcador de células tumorales, no se expresa en tejidos normales y se asocia con comportamiento agresivo en cáncer. No es esencial para todas las células.",
+                q13: "Los sulfátidos son glicoesfingolípidos con grupos sulfato, también llamados sulfolípidos, derivados de cerebrósidos sulfatados.",
+                q14: "Los glicoesfingolípidos contienen ácidos grasos de cadena muy larga como lignocérico, nervónico y cerebrónico.",
+                q15: "Los glicoesfingolípidos participan en reconocimiento celular, son antígenos de grupos sanguíneos, receptores de patógenos y marcadores tumorales.",
+                q16: "Los terpenos se derivan de unidades isoprénicas, son lípidos simples insaponificables y se clasifican por número de unidades. No siempre contienen nitrógeno.",
+                q17: "El β-caroteno es precursor de vitamina A, actúa como antioxidante y es esencial para la visión. No participa directamente en síntesis de hormonas esteroideas.",
+                q18: "Los terpenos se clasifican según unidades isoprénicas: monoterpenos (2), sesquiterpenos (3), diterpenos (4) y tetraterpenos (8).",
+                q19: "Los dolicoles son poliprenoides de cadena larga que intervienen en síntesis de oligosacáridos de glicoproteínas como dolicolfosfato. No son vitaminas.",
+                q20: "Todos estos son ejemplos correctos de terpenos clasificados por número de unidades isoprénicas.",
+                q21: "Los esteroides se derivan del ciclopentanoperhidrofenantreno, se forman a partir de escualeno y son lípidos simples insaponificables. No siempre contienen fosfato.",
+                q22: "El colesterol es precursor de hormonas, regula fluidez de membranas, no puede degradar su sistema de anillos y se excreta como tal o como ácidos biliares.",
+                q23: "Los esteroides se clasifican en esteroles, ácidos/sales biliares y hormonas esteroideas.",
+                q24: "Los esteroles tienen grupo OH en C3, cadena lateral en C17, están en membranas de eucariotas y regulan fluidez.",
+                q25: "Todos estos son ejemplos correctos de esteroles según su origen.",
+                q26: "Las lipoproteínas transportan lípidos en sangre, tienen núcleo hidrofóbico y superficie de fosfolípidos y apoproteínas. No son siempre del mismo tamaño.",
+                q27: "Las LDL tienen densidad 1.006-1.063, 23% de proteína, transportan colesterol a tejidos y niveles elevados aumentan riesgo cardiovascular.",
+                q28: "Las principales clases son quilomicrones, VLDL, LDL y HDL.",
+                q29: "La superficie de lipoproteínas contiene fosfolípidos, colesterol libre y apoproteínas. Los triacilgliceroles están en el núcleo.",
+                q30: "Las HDL tienen alta densidad, alto contenido proteico, transportan colesterol al hígado y se consideran 'colesterol bueno'."
+            };
+            
+            let resultsHTML = "";
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            
+            for (const question in correctAnswers) {
+                const selectedOptions = Array.from(document.querySelectorAll(`input[name="${question}"]:checked`)).map(input => input.value);
+                const correctOptions = correctAnswers[question];
+                
+                // Verificar si las respuestas seleccionadas son correctas
+                const isCorrect = selectedOptions.length === correctOptions.length && 
+                                 selectedOptions.every(option => correctOptions.includes(option));
+                
+                if (isCorrect) {
+                    score++;
+                }
+                
+                resultsHTML += `
+                    <div class="question">
+                        <p><strong>Pregunta ${question.replace('q', '')}:</strong> ${isCorrect ? '✅ Correcta' : '❌ Incorrecta'}</p>
+                        <p><strong>Respuesta correcta:</strong> ${correctOptions.join(', ')}</p>
+                        <div class="answer-explanation">
+                            <strong>Fundamento:</strong> ${answerExplanations[question]}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Mostrar puntuación y respuestas
+            document.getElementById('answers').innerHTML = `
+                <h3>Puntuación: ${score} / ${totalQuestions}</h3>
+                ${resultsHTML}
+            `;
+            
+            document.getElementById('solucionario').style.display = 'block';
+            
+            // Desplazarse al solucionario
+            document.getElementById('solucionario').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function resetQuiz() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            document.getElementById('solucionario').style.display = 'none';
+        }
+        
+        // Añadir efecto visual adicional al hacer clic en las opciones
+        document.querySelectorAll('.options input').forEach(input => {
+            input.addEventListener('change', function() {
+                const label = this.closest('label');
+                if (this.checked) {
+                    label.style.backgroundColor = '#ffd6e0';
+                    label.style.border = '2px solid #ff85a2';
+                    label.style.transform = 'scale(1.02)';
+                    label.style.boxShadow = '0 2px 8px rgba(255, 133, 162, 0.3)';
+                } else {
+                    label.style.backgroundColor = '';
+                    label.style.border = '2px solid transparent';
+                    label.style.transform = '';
+                    label.style.boxShadow = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

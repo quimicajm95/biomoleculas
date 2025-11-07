@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio Kawaii: Relación Estructura-Función de Proteínas</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #fff5f7;
+            color: #555;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-top: 80px;
+        }
+        h1 {
+            text-align: center;
+            color: #ff85a2;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #ff85a2;
+            border-bottom: 2px dashed #ffc2d1;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #ff9ebb;
+        }
+        .section {
+            background-color: #fff0f5;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #ffc2d1;
+            scroll-margin-top: 100px;
+        }
+        .kawaii-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        .question {
+            background-color: #fff9fb;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #ff85a2;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .options label:hover {
+            background-color: #ffe4ec;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .options input {
+            margin-right: 8px;
+        }
+        .answer-key {
+            background-color: #e8f4f8;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 2px solid #a2d2ff;
+        }
+        .answer-key h2 {
+            color: #a2d2ff;
+            border-bottom: 2px dashed #bde0fe;
+        }
+        .answer-explanation {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+        }
+        button {
+            background-color: #ff85a2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff6b9d;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header-img {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header-img img {
+            max-width: 200px;
+        }
+        .topic {
+            margin-bottom: 30px;
+        }
+        
+        /* Barra de navegación */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffc2d1;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #ff4d7a;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links li {
+            margin-left: 20px;
+        }
+        .nav-links a {
+            color: #ff4d7a;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #ff85a2;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Efectos para las opciones seleccionadas */
+        .options input:checked + span {
+            font-weight: bold;
+            color: #ff4d7a;
+        }
+        .options label:has(input:checked) {
+            background-color: #ffd6e0;
+            border: 2px solid #ff85a2;
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(255, 133, 162, 0.3);
+        }
+        
+        /* Animación suave al desplazarse */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Botones de acción */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .home-button {
+            background-color: #a2d2ff;
+        }
+        .home-button:hover {
+            background-color: #7fbfff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🏠</span>
+                Inicio
+            </a>
+            <ul class="nav-links">
+                <li><a href="#introduccion">Introducción</a></li>
+                <li><a href="#niveles-analisis">Niveles de Análisis</a></li>
+                <li><a href="#estructura-funcion">Estructura-Función</a></li>
+                <li><a href="#hemoglobina-mioglobina">Hb vs Mb</a></li>
+                <li><a href="#casos-clinicos">Casos Clínicos</a></li>
+                <li><a href="#solucionario">Solucionario</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="header-img">
+            <div style="font-size: 4em;">🩸🌸</div>
+        </div>
+        <h1>Relación Estructura-Función de Proteínas</h1>
+        
+        <!-- Introducción -->
+        <div class="section topic" id="introduccion">
+            <h2><span class="kawaii-icon">📚</span>Introducción</h2>
+            
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>La relación estructura-función es fundamental para comprender cómo las proteínas realizan sus funciones biológicas específicas. Esta conferencia se enfoca en analizar esta relación a diferentes niveles, utilizando como ejemplos principales la hemoglobina y la mioglobina, dos proteínas cruciales para el transporte y almacenamiento de oxígeno en los organismos.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>1. ¿Cuáles de las siguientes afirmaciones sobre la relación estructura-función en proteínas son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q1" value="a"><span> La estructura tridimensional determina la función específica de la proteína</span></label>
+                        <label><input type="checkbox" name="q1" value="b"><span> Cambios en la secuencia de aminoácidos pueden alterar la función</span></label>
+                        <label><input type="checkbox" name="q1" value="c"><span> Todas las proteínas con estructuras similares tienen funciones idénticas</span></label>
+                        <label><input type="checkbox" name="q1" value="d"><span> La función de una proteína es independiente de su estructura</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>2. ¿Por qué es importante estudiar la relación estructura-función en proteínas como la hemoglobina y mioglobina?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q2" value="a"><span> Permite comprender mecanismos moleculares de enfermedades</span></label>
+                        <label><input type="checkbox" name="q2" value="b"><span> Ayuda en el diseño de fármacos específicos</span></label>
+                        <label><input type="checkbox" name="q2" value="c"><span> Facilita la comprensión de la evolución molecular</span></label>
+                        <label><input type="checkbox" name="q2" value="d"><span> Solo tiene interés académico sin aplicaciones prácticas</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>3. ¿Qué métodos se utilizan para estudiar la estructura de proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q3" value="a"><span> Espectrometría de masa</span></label>
+                        <label><input type="checkbox" name="q3" value="b"><span> Secuenciación de Edman</span></label>
+                        <label><input type="checkbox" name="q3" value="c"><span> Cristalografía de rayos X</span></label>
+                        <label><input type="checkbox" name="q3" value="d"><span> Bases de datos de secuencias</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>4. ¿Cuáles son las características del reconocimiento molecular en proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q4" value="a"><span> Requiere complementariedad geométrica</span></label>
+                        <label><input type="checkbox" name="q4" value="b"><span> Implica interacciones específicas</span></label>
+                        <label><input type="checkbox" name="q4" value="c"><span> Puede formar complejos estables o transitorios</span></label>
+                        <label><input type="checkbox" name="q4" value="d"><span> Es un proceso aleatorio sin especificidad</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>5. En el desarrollo de medicamentos, los investigadores estudian la estructura de proteínas diana para diseñar fármacos más efectivos. ¿Qué ventajas ofrece el conocimiento de la estructura proteica en este contexto?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q5" value="a"><span> Permite diseñar moléculas que se unan específicamente al sitio activo</span></label>
+                        <label><input type="checkbox" name="q5" value="b"><span> Facilita la predicción de efectos secundarios</span></label>
+                        <label><input type="checkbox" name="q5" value="c"><span> Ayuda a entender los mecanismos de resistencia a fármacos</span></label>
+                        <label><input type="checkbox" name="q5" value="d"><span> Reduce significativamente el tiempo de desarrollo de nuevos medicamentos</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Niveles de análisis -->
+        <div class="section topic" id="niveles-analisis">
+            <h2><span class="kawaii-icon">🔬</span>Niveles de Análisis Estructura-Función</h2>
+            
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>El estudio de la relación estructura-función puede realizarse a tres niveles diferentes: Fenotípico (organismo completo, patologías, aspectos poblacionales), Biológico (contexto celular, localización, rutas metabólicas) y Bioquímico (estructura molecular, mecanismos, interacciones específicas). Cada nivel proporciona información complementaria sobre cómo la estructura determina la función.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>6. ¿Cuáles son las características del nivel de análisis Fenotípico?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q6" value="a"><span> Estudia la proteína dentro del organismo como un todo</span></label>
+                        <label><input type="checkbox" name="q6" value="b"><span> Analiza el impacto de la función en el fenotipo</span></label>
+                        <label><input type="checkbox" name="q6" value="c"><span> Se enfoca en aspectos poblacionales</span></label>
+                        <label><input type="checkbox" name="q6" value="d"><span> Examina interacciones moleculares específicas</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>7. ¿Qué aspectos caracterizan el nivel de análisis Biológico?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q7" value="a"><span> Localización celular de la proteína</span></label>
+                        <label><input type="checkbox" name="q7" value="b"><span> Condiciones fisiológicas y requerimientos</span></label>
+                        <label><input type="checkbox" name="q7" value="c"><span> Rutas metabólicas y esquemas de señalización</span></label>
+                        <label><input type="checkbox" name="q7" value="d"><span> Estructura atómica detallada</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>8. ¿Qué información se obtiene en el nivel de análisis Bioquímico?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q8" value="a"><span> Mecanismos moleculares que determinan la función</span></label>
+                        <label><input type="checkbox" name="q8" value="b"><span> Identificación de aminoácidos determinantes</span></label>
+                        <label><input type="checkbox" name="q8" value="c"><span> Interacciones relacionadas con la modulación de función</span></label>
+                        <label><input type="checkbox" name="q8" value="d"><span> Distribución de la proteína en diferentes tejidos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>9. ¿Cuáles son fuentes de información para el análisis bioquímico de estructura-función?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q9" value="a"><span> Composición y secuencia de aminoácidos</span></label>
+                        <label><input type="checkbox" name="q9" value="b"><span> Disposición espacial de los átomos</span></label>
+                        <label><input type="checkbox" name="q9" value="c"><span> Interacciones y propiedades moleculares</span></label>
+                        <label><input type="checkbox" name="q9" value="d"><span> Datos epidemiológicos poblacionales</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>10. Un equipo de investigación está estudiando una nueva proteína implicada en una enfermedad rara. Para comprender completamente su papel, deciden aplicar los tres niveles de análisis. ¿Qué tipo de información esperarían obtener en cada nivel?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q10" value="a"><span> Nivel fenotípico: síntomas y prevalencia de la enfermedad</span></label>
+                        <label><input type="checkbox" name="q10" value="b"><span> Nivel biológico: localización celular y rutas afectadas</span></label>
+                        <label><input type="checkbox" name="q10" value="c"><span> Nivel bioquímico: estructura 3D y mecanismo molecular</span></label>
+                        <label><input type="checkbox" name="q10" value="d"><span> Solo información sobre la secuencia de aminoácidos</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Estructura-función -->
+        <div class="section topic" id="estructura-funcion">
+            <h2><span class="kawaii-icon">🌀</span>Mecanismos de Estructura-Función</h2>
+            
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Los mecanismos que relacionan estructura y función incluyen: movimientos conformacionales (interior rígido, superficie flexible), reconocimiento molecular (complementariedad geométrica), fuerzas de interacción reversibles (electrostáticas, puentes H, hidrofóbicas, van der Waals) y mecanismos de reacción cíclicos. Estos elementos permiten a las proteínas realizar funciones específicas mediante uniones y separaciones sucesivas controladas por fuerzas en las superficies.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>11. ¿Qué características presentan los movimientos moleculares en las proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q11" value="a"><span> El interior de las estructuras es generalmente rígido</span></label>
+                        <label><input type="checkbox" name="q11" value="b"><span> La superficie tiende a ser más plástica y flexible</span></label>
+                        <label><input type="checkbox" name="q11" value="c"><span> Los movimientos son esenciales para el reconocimiento molecular</span></label>
+                        <label><input type="checkbox" name="q11" value="d"><span> Todas las regiones de la proteína son igualmente flexibles</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>12. ¿Cómo ocurre el reconocimiento molecular entre proteínas y sus ligandos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q12" value="a"><span> Requiere complementariedad geométrica</span></label>
+                        <label><input type="checkbox" name="q12" value="b"><span> Implica interacciones específicas</span></label>
+                        <label><input type="checkbox" name="q12" value="c"><span> Puede formar complejos estables o transitorios</span></label>
+                        <label><input type="checkbox" name="q12" value="d"><span> Es un proceso completamente aleatorio</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>13. ¿Qué tipos de fuerzas de interacción participan en la función proteica?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q13" value="a"><span> Fuerzas electrostáticas</span></label>
+                        <label><input type="checkbox" name="q13" value="b"><span> Puentes de hidrógeno</span></label>
+                        <label><input type="checkbox" name="q13" value="c"><span> Interacciones hidrofóbicas</span></label>
+                        <label><input type="checkbox" name="q13" value="d"><span> Fuerzas de van der Waals</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>14. ¿Cómo influye la distancia en la importancia relativa de las diferentes fuerzas de interacción?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q14" value="a"><span> A larga distancia, las fuerzas electrostáticas son más importantes</span></label>
+                        <label><input type="checkbox" name="q14" value="b"><span> En proximidad, predominan puentes H e interacciones hidrofóbicas</span></label>
+                        <label><input type="checkbox" name="q14" value="c"><span> Las fuerzas de van der Waals son significativas a cualquier distancia</span></label>
+                        <label><input type="checkbox" name="q14" value="d"><span> La distancia no afecta la importancia relativa de las fuerzas</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>15. Las enzimas son proteínas que catalizan reacciones bioquímicas específicas. Un investigador está estudiando una enzima que pierde su actividad catalítica cuando se modifica un aminoácido específico en su sitio activo. ¿Qué conclusiones puede extraer sobre la relación estructura-función en esta enzima?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q15" value="a"><span> El aminoácido modificado es crítico para la función catalítica</span></label>
+                        <label><input type="checkbox" name="q15" value="b"><span> La estructura del sitio activo determina la especificidad del sustrato</span></label>
+                        <label><input type="checkbox" name="q15" value="c"><span> Pequeños cambios estructurales pueden abolir completamente la función</span></label>
+                        <label><input type="checkbox" name="q15" value="d"><span> La modificación probablemente altera las interacciones con el sustrato</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hemoglobina vs Mioglobina -->
+        <div class="section topic" id="hemoglobina-mioglobina">
+            <h2><span class="kawaii-icon">📄</span>Hemoglobina vs Mioglobina</h2>
+            
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>La hemoglobina (Hb) y mioglobina (Mb) son proteínas transportadoras de oxígeno con funciones complementarias. La Hb (estructura cuaternaria) transporta O₂ desde pulmones a tejidos, mostrando cooperatividad y regulación por pH, CO₂ y 2,3-bisfosfoglicerato. La Mb (estructura terciaria) almacena O₂ en músculo. Ambas contienen grupo hemo, pero la inserción del hemo en la estructura proteica modifica sus propiedades, reduciendo la afinidad por CO y previniendo la dimerización.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>16. ¿Cuáles son las diferencias funcionales principales entre hemoglobina y mioglobina?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q16" value="a"><span> Hb transporta O₂, Mb almacena O₂</span></label>
+                        <label><input type="checkbox" name="q16" value="b"><span> Hb muestra cooperatividad, Mb no</span></label>
+                        <label><input type="checkbox" name="q16" value="c"><span> La afinidad de Hb por O₂ es regulable, la de Mb no</span></label>
+                        <label><input type="checkbox" name="q16" value="d"><span> Ambas tienen idénticas propiedades de unión a O₂</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>17. ¿Qué ventajas proporciona la estructura cuaternaria de la hemoglobina?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q17" value="a"><span> Cooperatividad en la unión de oxígeno</span></label>
+                        <label><input type="checkbox" name="q17" value="b"><span> Regulación de la afinidad por O₂ mediante efectores</span></label>
+                        <label><input type="checkbox" name="q17" value="c"><span> Mayor capacidad de transporte de O₂</span></label>
+                        <label><input type="checkbox" name="q17" value="d"><span> Elimina la necesidad de grupo hemo</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>18. ¿Cómo afecta el grupo hemo a las propiedades de unión de oxígeno cuando está insertado en la estructura proteica?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q18" value="a"><span> Reduce la afinidad por CO comparado con el hemo libre</span></label>
+                        <label><input type="checkbox" name="q18" value="b"><span> Previene la dimerización de grupos hemo</span></label>
+                        <label><input type="checkbox" name="q18" value="c"><span> Proporciona un entorno hidrofóbico para el hierro</span></label>
+                        <label><input type="checkbox" name="q18" value="d"><span> Aumenta la afinidad por CO comparado con el hemo libre</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>19. ¿Qué factores regulan la afinidad de la hemoglobina por el oxígeno?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q19" value="a"><span> pH (efecto Bohr)</span></label>
+                        <label><input type="checkbox" name="q19" value="b"><span> Concentración de CO₂</span></label>
+                        <label><input type="checkbox" name="q19" value="c"><span> 2,3-bisfosfoglicerato (BPG)</span></label>
+                        <label><input type="checkbox" name="q19" value="d"><span> Temperatura</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>20. En atletas de alto rendimiento, se han observado adaptaciones en el sistema de transporte de oxígeno que mejoran el rendimiento físico. ¿Qué modificaciones en la hemoglobina podrían explicar estas adaptaciones?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q20" value="a"><span> Mayor concentración de hemoglobina en sangre</span></label>
+                        <label><input type="checkbox" name="q20" value="b"><span> Cambios en la regulación por BPG que afectan la liberación de O₂</span></label>
+                        <label><input type="checkbox" name="q20" value="c"><span> Modificaciones estructurales que alteran la curva de disociación</span></label>
+                        <label><input type="checkbox" name="q20" value="d"><span> Sustitución completa de hemoglobina por mioglobina</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Casos clínicos -->
+        <div class="section topic" id="casos-clinicos">
+            <h2><span class="kawaii-icon">🔄</span>Casos Clínicos y Mutaciones</h2>
+            
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Las mutaciones en la hemoglobina pueden causar enfermedades como la anemia falciforme (sustitución Glu6Val en cadena β) y talasemias. La anemia falciforme fue descrita por James Herrick en 1904 y caracterizada por Linus Pauling en 1949. La mutación causa polimerización de la HbS en condiciones de baja oxigenación, deformando los eritrocitos. Otras mutaciones afectan la afinidad por O₂, unión de BPG, estabilidad del hemo o disociación del tetrámero, demostrando la estrecha relación entre estructura y función.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>21. ¿Qué caracteriza a la anemia falciforme a nivel molecular?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q21" value="a"><span> Sustitución de Glu6 por Val en la cadena β</span></label>
+                        <label><input type="checkbox" name="q21" value="b"><span> Polimerización de la hemoglobina en condiciones de baja oxigenación</span></label>
+                        <label><input type="checkbox" name="q21" value="c"><span> Deformación de los eritrocitos en forma de hoz</span></label>
+                        <label><input type="checkbox" name="q21" value="d"><span> Aumento de la afinidad por el oxígeno</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>22. ¿Qué tipos de efectos pueden tener las mutaciones en la hemoglobina?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q22" value="a"><span> Cambio en la afinidad por O₂</span></label>
+                        <label><input type="checkbox" name="q22" value="b"><span> Pérdida del grupo hemo</span></label>
+                        <label><input type="checkbox" name="q22" value="c"><span> Disociación del tetrámero</span></label>
+                        <label><input type="checkbox" name="q22" value="d"><span> Alteración de la unión a BPG</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>23. ¿Cómo se manifiesta clínicamente la anemia falciforme?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q23" value="a"><span> Anemia hemolítica crónica</span></label>
+                        <label><input type="checkbox" name="q23" value="b"><span> Células falciformes en sangre periférica</span></label>
+                        <label><input type="checkbox" name="q23" value="c"><span> Mayor susceptibilidad a infecciones</span></label>
+                        <label><input type="checkbox" name="q23" value="d"><span> Ausencia completa de síntomas en portadores</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>24. ¿Qué papel juega el 2,3-bisfosfoglicerato (BPG) en la función de la hemoglobina?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q24" value="a"><span> Disminuye la afinidad por O₂</span></label>
+                        <label><input type="checkbox" name="q24" value="b"><span> Estabiliza la conformación T (desoxi)</span></label>
+                        <label><input type="checkbox" name="q24" value="c"><span> Facilita la liberación de O₂ en los tejidos</span></label>
+                        <label><input type="checkbox" name="q24" value="d"><span> Aumenta la afinidad por O₂</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>25. En regiones donde la malaria es endémica, la frecuencia del rasgo falciforme (heterocigotos para la anemia falciforme) es mayor que en otras poblaciones. ¿Qué explica esta distribución desde una perspectiva evolutiva?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q25" value="a"><span> Los heterocigotos tienen resistencia natural a la malaria</span></label>
+                        <label><input type="checkbox" name="q25" value="b"><span> El parásito de la malaria no puede desarrollarse bien en eritrocitos falciformes</span></label>
+                        <label><input type="checkbox" name="q25" value="c"><span> La selección natural favorece a los heterocigotos en estas regiones</span></label>
+                        <label><input type="checkbox" name="q25" value="d"><span> La mutación proporciona ventaja solo contra la malaria, sin otros efectos</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Solucionario -->
+        <div class="answer-key" id="solucionario">
+            <h2><span class="kawaii-icon">✅</span>Solucionario</h2>
+            <p>Aquí puedes verificar tus respuestas y entender por qué son correctas o incorrectas.</p>
+            
+            <div class="answer-item">
+                <h3>Pregunta 1</h3>
+                <p><strong>Respuestas correctas:</strong> a, b</p>
+                <p class="answer-explanation">No todas las proteínas con estructuras similares tienen funciones idénticas, y la función depende críticamente de la estructura.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 2</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">El estudio de estructura-función tiene importantes aplicaciones prácticas en medicina y biotecnología.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 3</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todos estos métodos se utilizan para estudiar diferentes aspectos de la estructura proteica.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 4</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">El reconocimiento molecular es altamente específico y no aleatorio.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 5</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">El conocimiento de la estructura proteica ofrece todas estas ventajas en el desarrollo de fármacos.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 6</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">El nivel fenotípico no se enfoca en interacciones moleculares específicas, eso corresponde al nivel bioquímico.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 7</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">La estructura atómica detallada se estudia en el nivel bioquímico.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 8</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">La distribución tisular corresponde al nivel biológico.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 9</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">Los datos epidemiológicos pertenecen al nivel fenotípico.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 10</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">Los tres niveles proporcionan información complementaria, no solo la secuencia de aminoácidos.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 11</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">Las diferentes regiones de la proteína tienen distintos grados de flexibilidad.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 12</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">El reconocimiento molecular es un proceso específico, no aleatorio.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 13</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todos estos tipos de fuerzas participan en las interacciones proteicas.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 14</h3>
+                <p><strong>Respuestas correctas:</strong> a, b</p>
+                <p class="answer-explanation">La distancia afecta significativamente la importancia relativa de las diferentes fuerzas.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 15</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todas estas conclusiones son válidas sobre la relación estructura-función en enzimas.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 16</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">Hb y Mb tienen propiedades de unión a O₂ diferentes debido a sus distintas funciones.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 17</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">La estructura cuaternaria no elimina la necesidad del grupo hemo.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 18</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">La inserción en la estructura proteica reduce, no aumenta, la afinidad por CO.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 19</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todos estos factores pueden regular la afinidad de la hemoglobina por el oxígeno.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 20</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">La hemoglobina no es sustituida por mioglobina en atletas.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 21</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">La anemia falciforme disminuye, no aumenta, la afinidad por el oxígeno.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 22</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c, d</p>
+                <p class="answer-explanation">Todas estas alteraciones pueden resultar de mutaciones en la hemoglobina.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 23</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">Los portadores (heterocigotos) pueden presentar síntomas bajo condiciones de estrés.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 24</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">El BPG disminuye, no aumenta, la afinidad por O₂.</p>
+            </div>
+            
+            <div class="answer-item">
+                <h3>Pregunta 25</h3>
+                <p><strong>Respuestas correctas:</strong> a, b, c</p>
+                <p class="answer-explanation">La mutación tiene tanto ventajas (resistencia a malaria) como desventajas (anemia en homocigotos).</p>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button onclick="checkAnswers()">Verificar respuestas</button>
+            <button onclick="resetAnswers()">Reiniciar respuestas</button>
+            <a href="index.html" style="text-decoration: none;">
+                <button class="home-button">Volver al Inicio</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            const correctAnswers = {
+                q1: ['a', 'b'],
+                q2: ['a', 'b', 'c'],
+                q3: ['a', 'b', 'c', 'd'],
+                q4: ['a', 'b', 'c'],
+                q5: ['a', 'b', 'c', 'd'],
+                q6: ['a', 'b', 'c'],
+                q7: ['a', 'b', 'c'],
+                q8: ['a', 'b', 'c'],
+                q9: ['a', 'b', 'c'],
+                q10: ['a', 'b', 'c'],
+                q11: ['a', 'b', 'c'],
+                q12: ['a', 'b', 'c'],
+                q13: ['a', 'b', 'c', 'd'],
+                q14: ['a', 'b'],
+                q15: ['a', 'b', 'c', 'd'],
+                q16: ['a', 'b', 'c'],
+                q17: ['a', 'b', 'c'],
+                q18: ['a', 'b', 'c'],
+                q19: ['a', 'b', 'c', 'd'],
+                q20: ['a', 'b', 'c'],
+                q21: ['a', 'b', 'c'],
+                q22: ['a', 'b', 'c', 'd'],
+                q23: ['a', 'b', 'c'],
+                q24: ['a', 'b', 'c'],
+                q25: ['a', 'b', 'c']
+            };
+            
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            
+            for (const question in correctAnswers) {
+                const selectedOptions = Array.from(document.querySelectorAll(`input[name="${question}"]:checked`)).map(input => input.value);
+                const correctOptions = correctAnswers[question];
+                
+                // Verificar si las respuestas seleccionadas coinciden exactamente con las correctas
+                if (selectedOptions.length === correctOptions.length && 
+                    selectedOptions.every(option => correctOptions.includes(option))) {
+                    score++;
+                }
+            }
+            
+            alert(`Has acertado ${score} de ${totalQuestions} preguntas. ¡Revisa el solucionario para más detalles!`);
+            
+            // Desplazarse al solucionario
+            document.getElementById('solucionario').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function resetAnswers() {
+            const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+            allCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            alert('Todas las respuestas han sido reiniciadas.');
+        }
+    </script>
+</body>
+</html>

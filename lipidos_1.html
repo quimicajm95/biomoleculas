@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio Kawaii de Lípidos</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #fff5f7;
+            color: #555;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-top: 80px;
+        }
+        h1 {
+            text-align: center;
+            color: #ff85a2;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #ff85a2;
+            border-bottom: 2px dashed #ffc2d1;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #ff9ebb;
+        }
+        .section {
+            background-color: #fff0f5;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #ffc2d1;
+            scroll-margin-top: 100px;
+        }
+        .kawaii-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        .question {
+            background-color: #fff9fb;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #ff85a2;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .options label:hover {
+            background-color: #ffe4ec;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .options input {
+            margin-right: 8px;
+        }
+        .answer-key {
+            background-color: #e8f4f8;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 2px solid #a2d2ff;
+        }
+        .answer-key h2 {
+            color: #a2d2ff;
+            border-bottom: 2px dashed #bde0fe;
+        }
+        .answer-explanation {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+        }
+        button {
+            background-color: #ff85a2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff6b9d;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header-img {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header-img img {
+            max-width: 200px;
+        }
+        .topic {
+            margin-bottom: 30px;
+        }
+        
+        /* Barra de navegación */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffc2d1;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #ff4d7a;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links li {
+            margin-left: 20px;
+        }
+        .nav-links a {
+            color: #ff4d7a;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #ff85a2;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Efectos para las opciones seleccionadas */
+        .options input:checked + span {
+            font-weight: bold;
+            color: #ff4d7a;
+        }
+        .options label:has(input:checked) {
+            background-color: #ffd6e0;
+            border: 2px solid #ff85a2;
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(255, 133, 162, 0.3);
+        }
+        
+        /* Animación suave al desplazarse */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Botones de acción */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .home-button {
+            background-color: #a2d2ff;
+        }
+        .home-button:hover {
+            background-color: #7fbfff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🏠</span>
+                Inicio
+            </a>
+            <ul class="nav-links">
+                <li><a href="#introduccion">Introducción</a></li>
+                <li><a href="#funciones">Funciones</a></li>
+                <li><a href="#clasificacion">Clasificación</a></li>
+                <li><a href="#acidos-grasos">Ácidos Grasos</a></li>
+                <li><a href="#solucionario">Solucionario</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="header-img">
+            <!-- Espacio para imagen kawaii -->
+            <div style="font-size: 4em;">🧪🌸</div>
+        </div>
+        <h1>Estudio Kawaii de Lípidos</h1>
+        
+        <!-- Introducción -->
+        <div class="section topic" id="introduccion">
+            <h2><span class="kawaii-icon">📚</span>Introducción a los Lípidos</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Los lípidos son un grupo diverso de moléculas orgánicas que incluyen aceites, grasas y ceras. Aunque han sido utilizados por los humanos desde la prehistoria, su estudio científico comenzó a finales del siglo XIX. No existe una definición precisa de lípidos, pero se caracterizan por ser insolubles en agua pero solubles en solventes orgánicos, y están constituidos principalmente por estructuras hidrocarbonadas.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>1. ¿Cuáles de las siguientes son características generales de los lípidos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q1" value="a"><span> Son solubles en agua</span></label>
+                        <label><input type="checkbox" name="q1" value="b"><span> Son insolubles en agua pero solubles en solventes orgánicos</span></label>
+                        <label><input type="checkbox" name="q1" value="c"><span> Están constituidos principalmente por estructuras hidrocarbonadas</span></label>
+                        <label><input type="checkbox" name="q1" value="d"><span> Siempre contienen fósforo en su estructura</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Funciones biológicas -->
+        <div class="section topic" id="funciones">
+            <h2><span class="kawaii-icon">🔬</span>Funciones Biológicas de los Lípidos</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Los lípidos cumplen diversas funciones biológicas esenciales: 1) Transporte y almacenamiento de energía, 2) Componentes estructurales de membranas biológicas, 3) Actividad biológica especializada (hormonas, mensajeros intracelulares), y 4) Cubiertas protectoras en la superficie de organismos.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>2. ¿Cuáles de las siguientes son funciones de los lípidos en los organismos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q2" value="a"><span> Almacenamiento de energía</span></label>
+                        <label><input type="checkbox" name="q2" value="b"><span> Componentes estructurales de membranas</span></label>
+                        <label><input type="checkbox" name="q2" value="c"><span> Función como hormonas y mensajeros intracelulares</span></label>
+                        <label><input type="checkbox" name="q2" value="d"><span> Producción directa de ATP en la respiración celular</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>3. En animales desérticos como los camellos, las reservas de lípidos en sus jorobas tienen una función vital relacionada con:</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q3" value="a"><span> Producción de agua metabólica mediante combustión aeróbica</span></label>
+                        <label><input type="checkbox" name="q3" value="b"><span> Almacenamiento de vitaminas liposolubles</span></label>
+                        <label><input type="checkbox" name="q3" value="c"><span> Aislamiento térmico contra las altas temperaturas</span></label>
+                        <label><input type="checkbox" name="q3" value="d"><span> Producción de calor durante la noche</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Clasificación de lípidos -->
+        <div class="section topic" id="clasificacion">
+            <h2><span class="kawaii-icon">📊</span>Clasificación de los Lípidos</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Los lípidos se clasifican en: 1) Simples (insaponificables): ácidos grasos, eicosanoides, terpenos, esteroides, éteres alquílicos del glicerol; 2) Complejos (saponificables): acilglicéridos, fosfoglicéridos, esfingolípidos, ceras. Los lípidos simples generalmente son neutros y apolares, mientras que los complejos suelen ser polares.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>4. ¿Cuáles de los siguientes lípidos pertenecen al grupo de lípidos simples (insaponificables)?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q4" value="a"><span> Ácidos grasos</span></label>
+                        <label><input type="checkbox" name="q4" value="b"><span> Fosfoglicéridos</span></label>
+                        <label><input type="checkbox" name="q4" value="c"><span> Esteroides</span></label>
+                        <label><input type="checkbox" name="q4" value="d"><span> Terpenos</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ácidos grasos -->
+        <div class="section topic" id="acidos-grasos">
+            <h2><span class="kawaii-icon">🔍</span>Ácidos Grasos</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Los ácidos grasos son ácidos carboxílicos con cadenas hidrocarbonadas altamente reducidas (4-36 carbonos). Presentan un grupo carboxilato polar y una cadena hidrocarbonada apolar, lo que los convierte en moléculas anfipáticas. Las características principales incluyen: número par de carbonos (más frecuente), cadenas insaturadas más comunes que saturadas en eucariotas, y dobles enlaces en configuración cis.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>5. María está analizando su dieta y descubre que consume principalmente ácidos grasos saturados. Sabiendo que los ácidos grasos insaturados son importantes para la salud, ¿cuáles de las siguientes opciones debería considerar para aumentar su consumo de ácidos grasos insaturados?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q5" value="a"><span> Consumir más aguacate y aceite de oliva (ricos en ácido oleico)</span></label>
+                        <label><input type="checkbox" name="q5" value="b"><span> Aumentar el consumo de pescados azules como salmón y atún (ricos en EPA y DHA)</span></label>
+                        <label><input type="checkbox" name="q5" value="c"><span> Utilizar más mantequilla en lugar de aceites vegetales</span></label>
+                        <label><input type="checkbox" name="q5" value="d"><span> Consumir más frutos secos como nueces y almendras</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button onclick="checkAnswers()">Comprobar respuestas</button>
+            <a href="index.html" style="text-decoration: none;">
+                <button class="home-button">Volver al Inicio</button>
+            </a>
+        </div>
+        
+        <div class="answer-key" id="solucionario" style="display:none;">
+            <h2><span class="kawaii-icon">📝</span>Solucionario</h2>
+            <div id="answers"></div>
+            <div class="action-buttons">
+                <a href="index.html">
+                    <button class="home-button">Volver al Inicio</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            // Respuestas correctas
+            const correctAnswers = {
+                q1: ['b', 'c'],
+                q2: ['a', 'b', 'c'],
+                q3: ['a'],
+                q4: ['a', 'c', 'd'],
+                q5: ['a', 'b', 'd']
+            };
+            
+            // Fundamentos de las respuestas
+            const answerExplanations = {
+                q1: "Los lípidos son insolubles en agua pero solubles en solventes orgánicos y están constituidos principalmente por estructuras hidrocarbonadas. No siempre contienen fósforo (solo algunos lípidos complejos como los fosfolípidos).",
+                q2: "Los lípidos tienen funciones de almacenamiento de energía, componentes estructurales de membranas y función como hormonas y mensajeros intracelulares. No producen directamente ATP en la respiración celular, aunque su oxidación genera energía que puede utilizarse para producir ATP.",
+                q3: "En animales desérticos como camellos, las reservas de lípidos en sus jorobas se utilizan principalmente para producir agua metabólica mediante combustión aeróbica, lo que es vital en ambientes con escasez de agua.",
+                q4: "Los lípidos simples (insaponificables) incluyen ácidos grasos, esteroides y terpenos. Los fosfoglicéridos pertenecen a los lípidos complejos (saponificables).",
+                q5: "Para aumentar el consumo de ácidos grasos insaturados, María debería consumir aguacate y aceite de oliva (ricos en ácido oleico), pescados azules (ricos en EPA y DHA) y frutos secos. La mantequilla contiene principalmente ácidos grasos saturados."
+            };
+            
+            let resultsHTML = "";
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            
+            for (const question in correctAnswers) {
+                const selectedOptions = Array.from(document.querySelectorAll(`input[name="${question}"]:checked`)).map(input => input.value);
+                const correctOptions = correctAnswers[question];
+                
+                // Verificar si las respuestas seleccionadas son correctas
+                const isCorrect = selectedOptions.length === correctOptions.length && 
+                                 selectedOptions.every(option => correctOptions.includes(option));
+                
+                if (isCorrect) {
+                    score++;
+                }
+                
+                resultsHTML += `
+                    <div class="question">
+                        <p><strong>Pregunta ${question.replace('q', '')}:</strong> ${isCorrect ? '✅ Correcta' : '❌ Incorrecta'}</p>
+                        <p><strong>Respuesta correcta:</strong> ${correctOptions.join(', ')}</p>
+                        <div class="answer-explanation">
+                            <strong>Fundamento:</strong> ${answerExplanations[question]}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Mostrar puntuación y respuestas
+            document.getElementById('answers').innerHTML = `
+                <h3>Puntuación: ${score} / ${totalQuestions}</h3>
+                ${resultsHTML}
+            `;
+            
+            document.getElementById('solucionario').style.display = 'block';
+            
+            // Desplazarse al solucionario
+            document.getElementById('solucionario').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Añadir efecto visual adicional al hacer clic en las opciones
+        document.querySelectorAll('.options input').forEach(input => {
+            input.addEventListener('change', function() {
+                const label = this.closest('label');
+                if (this.checked) {
+                    label.style.backgroundColor = '#ffd6e0';
+                    label.style.border = '2px solid #ff85a2';
+                    label.style.transform = 'scale(1.02)';
+                    label.style.boxShadow = '0 2px 8px rgba(255, 133, 162, 0.3)';
+                } else {
+                    label.style.backgroundColor = '';
+                    label.style.border = '2px solid transparent';
+                    label.style.transform = '';
+                    label.style.boxShadow = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

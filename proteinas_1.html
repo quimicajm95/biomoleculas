@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio Kawaii de Proteínas</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #fff5f7;
+            color: #555;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-top: 80px;
+        }
+        h1 {
+            text-align: center;
+            color: #ff85a2;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #ff85a2;
+            border-bottom: 2px dashed #ffc2d1;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #ff9ebb;
+        }
+        .section {
+            background-color: #fff0f5;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #ffc2d1;
+            scroll-margin-top: 100px;
+        }
+        .kawaii-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        .question {
+            background-color: #fff9fb;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #ff85a2;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .options label:hover {
+            background-color: #ffe4ec;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .options input {
+            margin-right: 8px;
+        }
+        .answer-key {
+            background-color: #e8f4f8;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 2px solid #a2d2ff;
+        }
+        .answer-key h2 {
+            color: #a2d2ff;
+            border-bottom: 2px dashed #bde0fe;
+        }
+        .answer-explanation {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+        }
+        button {
+            background-color: #ff85a2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff6b9d;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header-img {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header-img img {
+            max-width: 200px;
+        }
+        .topic {
+            margin-bottom: 30px;
+        }
+        
+        /* Barra de navegación */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffc2d1;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #ff4d7a;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links li {
+            margin-left: 20px;
+        }
+        .nav-links a {
+            color: #ff4d7a;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #ff85a2;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Efectos para las opciones seleccionadas */
+        .options input:checked + span {
+            font-weight: bold;
+            color: #ff4d7a;
+        }
+        .options label:has(input:checked) {
+            background-color: #ffd6e0;
+            border: 2px solid #ff85a2;
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(255, 133, 162, 0.3);
+        }
+        
+        /* Animación suave al desplazarse */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Botones de acción */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .home-button {
+            background-color: #a2d2ff;
+        }
+        .home-button:hover {
+            background-color: #7fbfff;
+        }
+        
+        /* Tablas con estilo kawaii */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ffc2d1;
+        }
+        th {
+            background-color: #ff85a2;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #fff0f5;
+        }
+        tr:hover {
+            background-color: #ffe4ec;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="lipidos_1.html" class="logo">
+                <span class="logo-icon">🏠</span>
+                Inicio
+            </a>
+            <ul class="nav-links">
+                <li><a href="#introduccion">Introducción</a></li>
+                <li><a href="#tamaño">Tamaño</a></li>
+                <li><a href="#clasificacion">Clasificación</a></li>
+                <li><a href="#estructura">Estructura</a></li>
+                <li><a href="#primaria">Estructura Primaria</a></li>
+                <li><a href="#importancia">Importancia</a></li>
+                <li><a href="#solucionario">Solucionario</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="header-img">
+            <div style="font-size: 4em;">🧬🌸</div>
+        </div>
+        <h1>Estudio Kawaii de Proteínas</h1>
+        
+        <!-- Introducción -->
+        <div class="section topic" id="introduccion">
+            <h2><span class="kawaii-icon">📚</span>Introducción a las Proteínas</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Las proteínas son biomoléculas esenciales para todos los seres vivos. Esta conferencia se enfoca en la estructura primaria de las proteínas, incluyendo su clasificación, niveles estructurales y aplicaciones del estudio del nivel primario. Las proteínas presentan tamaños moleculares muy variables y pueden clasificarse según diferentes criterios como solubilidad, composición química, forma, localización celular y grado de asociación.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>1. ¿Cuáles de las siguientes afirmaciones sobre las proteínas son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q1" value="a"><span> Son biomoléculas esenciales para todos los seres vivos</span></label>
+                        <label><input type="checkbox" name="q1" value="b"><span> Presentan tamaños moleculares muy variables</span></label>
+                        <label><input type="checkbox" name="q1" value="c"><span> Pueden clasificarse según diferentes criterios</span></label>
+                        <label><input type="checkbox" name="q1" value="d"><span> Siempre tienen la misma estructura y función</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>2. María es estudiante de microbiología y está comenzando a estudiar proteínas. ¿Qué aspectos básicos sobre las proteínas debería entender para su examen?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q2" value="a"><span> Las proteínas tienen diferentes niveles estructurales</span></label>
+                        <label><input type="checkbox" name="q2" value="b"><span> La estructura primaria determina la función</span></label>
+                        <label><input type="checkbox" name="q2" value="c"><span> Existen diferentes criterios de clasificación</span></label>
+                        <label><input type="checkbox" name="q2" value="d"><span> Todas las proteínas son iguales en composición</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>3. ¿Qué aspectos se incluyen en el estudio de la estructura primaria de las proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q3" value="a"><span> Secuencia aminoacídica</span></label>
+                        <label><input type="checkbox" name="q3" value="b"><span> Puentes disulfuro</span></label>
+                        <label><input type="checkbox" name="q3" value="c"><span> Modificaciones postraduccionales</span></label>
+                        <label><input type="checkbox" name="q3" value="d"><span> Estructura tridimensional completa</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>4. ¿Por qué es importante estudiar la estructura primaria de las proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q4" value="a"><span> Determina cómo se pliega la proteína</span></label>
+                        <label><input type="checkbox" name="q4" value="b"><span> Aporta información sobre la función</span></label>
+                        <label><input type="checkbox" name="q4" value="c"><span> Permite entender relaciones evolutivas</span></label>
+                        <label><input type="checkbox" name="q4" value="d"><span> Tiene aplicaciones clínicas</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>5. ¿Qué bibliografía se recomienda para el estudio de las proteínas según la conferencia?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q5" value="a"><span> Principios de Bioquímica de Lehninger, Nelson y Cox</span></label>
+                        <label><input type="checkbox" name="q5" value="b"><span> Capítulo 3, páginas 97-111</span></label>
+                        <label><input type="checkbox" name="q5" value="c"><span> 4ta edición</span></label>
+                        <label><input type="checkbox" name="q5" value="d"><span> Química Orgánica Avanzada</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tamaño de las moléculas proteicas -->
+        <div class="section topic" id="tamaño">
+            <h2><span class="kawaii-icon">📏</span>Tamaño de las Moléculas Proteicas</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Las proteínas presentan tamaños moleculares muy variables, desde unos pocos miles de daltons (Da) a más de un millón. Se clasifican en: dipéptidos, tripéptidos, tetrapéptidos, pentapéptidos, oligopéptidos (< 30 aminoácidos, < 3000 Da), polipéptidos (30-50 aminoácidos, 3000-5000 Da) y proteínas (> 50 aminoácidos, >5000-100000 Da). La titina humana es la proteína más grande conocida con 2.993.000 Da y 26.926 residuos.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Proteína</th>
+                            <th>Masa molecular (Da)</th>
+                            <th>Número de residuos</th>
+                            <th>Número de cadenas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Citocromo c (humano)</td>
+                            <td>13.000</td>
+                            <td>104</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>Hemoglobina (humana)</td>
+                            <td>64.500</td>
+                            <td>574</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>Titina (humana)</td>
+                            <td>2.993.000</td>
+                            <td>26.926</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>6. ¿Cuáles de las siguientes afirmaciones sobre el tamaño de las proteínas son correctas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q6" value="a"><span> Las proteínas tienen tamaños moleculares muy variables</span></label>
+                        <label><input type="checkbox" name="q6" value="b"><span> Los oligopéptidos tienen menos de 30 aminoácidos</span></label>
+                        <label><input type="checkbox" name="q6" value="c"><span> Las proteínas tienen más de 50 aminoácidos</span></label>
+                        <label><input type="checkbox" name="q6" value="d"><span> Todas las proteínas tienen exactamente el mismo tamaño</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>7. Un investigador está estudiando una proteína con 45 aminoácidos y masa molecular de 4200 Da. ¿Cómo debería clasificar esta molécula?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q7" value="a"><span> Como polipéptido</span></label>
+                        <label><input type="checkbox" name="q7" value="b"><span> Tiene entre 30-50 aminoácidos</span></label>
+                        <label><input type="checkbox" name="q7" value="c"><span> Su masa está en el rango de 3000-5000 Da</span></label>
+                        <label><input type="checkbox" name="q7" value="d"><span> Como proteína completa</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>8. ¿Qué ejemplos de proteínas y sus tamaños son correctos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q8" value="a"><span> Citocromo c: 13.000 Da, 104 residuos</span></label>
+                        <label><input type="checkbox" name="q8" value="b"><span> Hemoglobina: 64.500 Da, 574 residuos</span></label>
+                        <label><input type="checkbox" name="q8" value="c"><span> Titina: 2.993.000 Da, 26.926 residuos</span></label>
+                        <label><input type="checkbox" name="q8" value="d"><span> Albúmina sérica: 68.500 Da, 609 residuos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>9. ¿Qué diferencia existe entre cadena polipeptídica y proteína?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q9" value="a"><span> No pueden considerarse sinónimos en todos los casos</span></label>
+                        <label><input type="checkbox" name="q9" value="b"><span> Una proteína puede tener una o más cadenas polipeptídicas</span></label>
+                        <label><input type="checkbox" name="q9" value="c"><span> Las proteínas multiméricas tienen múltiples cadenas</span></label>
+                        <label><input type="checkbox" name="q9" value="d"><span> Siempre son equivalentes</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>10. ¿Cómo se clasifican las proteínas según el número de cadenas polipeptídicas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q10" value="a"><span> Proteínas monoméricas: una cadena</span></label>
+                        <label><input type="checkbox" name="q10" value="b"><span> Proteínas multiméricas: múltiples cadenas</span></label>
+                        <label><input type="checkbox" name="q10" value="c"><span> Homomultiméricas: un tipo de polipéptido</span></label>
+                        <label><input type="checkbox" name="q10" value="d"><span> Heteromultiméricas: varios tipos de polipéptidos</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Clasificación de proteínas -->
+        <div class="section topic" id="clasificacion">
+            <h2><span class="kawaii-icon">📊</span>Clasificación de las Proteínas</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>Las proteínas pueden clasificarse según diferentes criterios: criterios físicos (solubilidad), químicos (composición), estructurales (forma, localización celular, grado de asociación) y funcionales. Según solubilidad: albúminas (solubles en agua), globulinas (solubles en soluciones salinas), prolaminas (solubles en alcohol), glutelinas (solubles en ácidos/bases), escleoproteínas (insolubles). Según composición: proteínas simples (solo aminoácidos) y conjugadas (con grupo prostético).</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Grupo Prostético</th>
+                            <th>Ejemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lipoproteínas</td>
+                            <td>Lípidos</td>
+                            <td>Beta-Lipoproteína</td>
+                        </tr>
+                        <tr>
+                            <td>Glucoproteínas</td>
+                            <td>Carbohidratos</td>
+                            <td>Ig G</td>
+                        </tr>
+                        <tr>
+                            <td>Hemoproteínas</td>
+                            <td>Hemo</td>
+                            <td>Hemoglobina</td>
+                        </tr>
+                        <tr>
+                            <td>Metaloproteínas</td>
+                            <td>Metales</td>
+                            <td>Ferritina, Alcohol DH</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>11. ¿Cuáles de los siguientes criterios se utilizan para clasificar proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q11" value="a"><span> Criterios físicos (solubilidad)</span></label>
+                        <label><input type="checkbox" name="q11" value="b"><span> Criterios químicos (composición)</span></label>
+                        <label><input type="checkbox" name="q11" value="c"><span> Criterios estructurales (forma)</span></label>
+                        <label><input type="checkbox" name="q11" value="d"><span> Criterios funcionales</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>12. Un bioquímico está analizando una proteína que solo se disuelve en soluciones alcohólicas. Según el criterio de solubilidad, ¿cómo debería clasificar esta proteína y qué ejemplo conoce?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q12" value="a"><span> Como prolaminas</span></label>
+                        <label><input type="checkbox" name="q12" value="b"><span> Ejemplo: gliadina de trigo</span></label>
+                        <label><input type="checkbox" name="q12" value="c"><span> Solubles en alcohol</span></label>
+                        <label><input type="checkbox" name="q12" value="d"><span> Como globulinas</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>13. ¿Qué caracteriza a las proteínas conjugadas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q13" value="a"><span> Tienen grupo prostético</span></label>
+                        <label><input type="checkbox" name="q13" value="b"><span> Holoproteína = apoproteína + grupo prostético</span></label>
+                        <label><input type="checkbox" name="q13" value="c"><span> Incluyen hemoglobina y citocromos</span></label>
+                        <label><input type="checkbox" name="q13" value="d"><span> Están formadas solo por aminoácidos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>14. ¿Cómo se clasifican las proteínas según su forma molecular?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q14" value="a"><span> Globulares: estructura esférica compacta</span></label>
+                        <label><input type="checkbox" name="q14" value="b"><span> Fibrosas: una dimensión predomina</span></label>
+                        <label><input type="checkbox" name="q14" value="c"><span> Las fibrosas suelen tener funciones estructurales</span></label>
+                        <label><input type="checkbox" name="q14" value="d"><span> Las globulares son siempre insolubles</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>15. ¿Qué ejemplos de proteínas conjugadas son correctos?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q15" value="a"><span> Hemoproteínas: grupo hemo (hemoglobina)</span></label>
+                        <label><input type="checkbox" name="q15" value="b"><span> Metaloproteínas: metales (ferritina, alcohol DH)</span></label>
+                        <label><input type="checkbox" name="q15" value="c"><span> Fosfoproteínas: fosfato (caseína de leche)</span></label>
+                        <label><input type="checkbox" name="q15" value="d"><span> Glucoproteínas: carbohidratos (Ig G)</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Estructura de proteínas -->
+        <div class="section topic" id="estructura">
+            <h2><span class="kawaii-icon">🏗️</span>Estructura de las Proteínas</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>La estructura de las proteínas se describe en términos de cuatro niveles de organización: estructura primaria (secuencia aminoacídica, puentes disulfuro, modificaciones postraduccionales), estructura secundaria (alfa hélice, hojas beta, giros beta), estructura terciaria (plegamiento tridimensional) y estructura cuaternaria (interacción de 2 o más polipéptidos). Las proteínas se clasifican en fibrosas (estructura lineal regular, rol estructural, insolubles), globulares (estructura compleja esférica, solubles) y de membrana (asociadas a membranas, hidrofóbicas).</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>16. ¿Cuáles son los niveles de organización estructural de las proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q16" value="a"><span> Estructura primaria</span></label>
+                        <label><input type="checkbox" name="q16" value="b"><span> Estructura secundaria</span></label>
+                        <label><input type="checkbox" name="q16" value="c"><span> Estructura terciaria</span></label>
+                        <label><input type="checkbox" name="q16" value="d"><span> Estructura cuaternaria</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>17. Un estudiante está analizando diferentes tipos de proteínas para un proyecto. ¿Qué características distinguen a las proteínas fibrosas de las globulares?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q17" value="a"><span> Fibrosas: estructura lineal, rol estructural</span></label>
+                        <label><input type="checkbox" name="q17" value="b"><span> Fibrosas: generalmente insolubles</span></label>
+                        <label><input type="checkbox" name="q17" value="c"><span> Globulares: forma esférica compacta</span></label>
+                        <label><input type="checkbox" name="q17" value="d"><span> Globulares: muy solubles (globulinas)</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>18. ¿Qué caracteriza a las proteínas de membrana?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q18" value="a"><span> Asociadas a sistemas membranosos</span></label>
+                        <label><input type="checkbox" name="q18" value="b"><span> AAs hidrofóbicos expuestos</span></label>
+                        <label><input type="checkbox" name="q18" value="c"><span> Insolubles en soluciones acuosas</span></label>
+                        <label><input type="checkbox" name="q18" value="d"><span> Requieren detergentes para solubilizarlas</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>19. ¿Qué elementos incluye la estructura secundaria de las proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q19" value="a"><span> Alfa hélice</span></label>
+                        <label><input type="checkbox" name="q19" value="b"><span> Hojas beta</span></label>
+                        <label><input type="checkbox" name="q19" value="c"><span> Giros beta</span></label>
+                        <label><input type="checkbox" name="q19" value="d"><span> Secuencia aminoacídica</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>20. ¿En qué se diferencia la estructura terciaria de la cuaternaria?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q20" value="a"><span> Terciaria: plegamiento tridimensional de una cadena</span></label>
+                        <label><input type="checkbox" name="q20" value="b"><span> Cuaternaria: interacción de 2 o más polipéptidos</span></label>
+                        <label><input type="checkbox" name="q20" value="c"><span> La cuaternaria implica subunidades</span></label>
+                        <label><input type="checkbox" name="q20" value="d"><span> Todas las proteínas tienen estructura cuaternaria</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Estructura primaria -->
+        <div class="section topic" id="primaria">
+            <h2><span class="kawaii-icon">🔤</span>Estructura Primaria</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>La estructura primaria incluye la secuencia de residuos aminoacídicos, los puentes disulfuro y las modificaciones postraduccionales. La secuencia aminoacídica es el orden en que los aminoácidos se unen del extremo N al extremo C de la cadena polipeptídica. Esta secuencia constituye una característica distintiva de cada proteína y es un criterio de identidad. La composición aminoacídica (cantidad de cada aminoácido) es diferente de la secuencia (disposición específica), ya que con la misma composición pueden existir diferentes secuencias y por tanto diferentes proteínas.</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>21. ¿Qué elementos componen la estructura primaria de las proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q21" value="a"><span> Secuencia de residuos aminoacídicos</span></label>
+                        <label><input type="checkbox" name="q21" value="b"><span> Puentes disulfuro</span></label>
+                        <label><input type="checkbox" name="q21" value="c"><span> Modificaciones postraduccionales</span></label>
+                        <label><input type="checkbox" name="q21" value="d"><span> Estructura tridimensional completa</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>22. ¿Por qué la secuencia aminoacídica es tan importante para las proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q22" value="a"><span> Es una característica distintiva de cada proteína</span></label>
+                        <label><input type="checkbox" name="q22" value="b"><span> Constituye un criterio de identidad</span></label>
+                        <label><input type="checkbox" name="q22" value="c"><span> Determina cómo se pliega la proteína</span></label>
+                        <label><input type="checkbox" name="q22" value="d"><span> Afecta la función de la proteína</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>23. ¿Qué diferencia existe entre composición aminoacídica y secuencia aminoacídica?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q23" value="a"><span> Composición: cantidad de cada aminoácido</span></label>
+                        <label><input type="checkbox" name="q23" value="b"><span> Secuencia: disposición específica de aminoácidos</span></label>
+                        <label><input type="checkbox" name="q23" value="c"><span> Con la misma composición puede haber diferentes secuencias</span></label>
+                        <label><input type="checkbox" name="q23" value="d"><span> Son conceptos equivalentes</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>24. ¿Cómo se lee la secuencia aminoacídica de una proteína?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q24" value="a"><span> Del extremo amino (N) al carboxilo (C)</span></label>
+                        <label><input type="checkbox" name="q24" value="b"><span> Es el orden de unión de los aminoácidos</span></label>
+                        <label><input type="checkbox" name="q24" value="c"><span> Del extremo carboxilo (C) al amino (N)</span></label>
+                        <label><input type="checkbox" name="q24" value="d"><span> En dirección aleatoria</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>25. ¿Qué fuerza principal estabiliza la estructura primaria?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q25" value="a"><span> Enlace peptídico</span></label>
+                        <label><input type="checkbox" name="q25" value="b"><span> Puentes de hidrógeno</span></label>
+                        <label><input type="checkbox" name="q25" value="c"><span> Interacciones hidrofóbicas</span></label>
+                        <label><input type="checkbox" name="q25" value="d"><span> Puentes disulfuro</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Importancia y aplicaciones -->
+        <div class="section topic" id="importancia">
+            <h2><span class="kawaii-icon">🌟</span>Importancia y Aplicaciones</h2>
+            <div class="content">
+                <h3>Resumen de contenido</h3>
+                <p>La secuencia de aminoácidos proporciona información bioquímica de gran importancia: permite comprender el mecanismo de acción molecular, elucidar la estructura tridimensional, conocer la función y localización celular, y estudiar la evolución de las proteínas. Las familias de proteínas comparten similitudes estructurales y funcionales. El análisis de secuencias tiene aplicaciones clínicas importantes, como el diagnóstico de enfermedades hereditarias causadas por mutaciones (ejemplo: anemia falciforme por cambio en hemoglobina).</p>
+                
+                <h3>Preguntas</h3>
+                <div class="question">
+                    <p>26. ¿Qué información proporciona la secuencia de aminoácidos de una proteína?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q26" value="a"><span> Mecanismo de acción molecular</span></label>
+                        <label><input type="checkbox" name="q26" value="b"><span> Función y localización celular</span></label>
+                        <label><input type="checkbox" name="q26" value="c"><span> Relaciones evolutivas</span></label>
+                        <label><input type="checkbox" name="q26" value="d"><span> Sitios de unión de grupos prostéticos</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>27. Un paciente es diagnosticado con anemia falciforme. ¿Qué relación existe entre esta enfermedad y la estructura primaria de las proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q27" value="a"><span> Es causada por una mutación en el gen de la hemoglobina</span></label>
+                        <label><input type="checkbox" name="q27" value="b"><span> Hay cambio de un aminoácido en la secuencia</span></label>
+                        <label><input type="checkbox" name="q27" value="c"><span> Afecta la forma de los eritrocitos</span></label>
+                        <label><input type="checkbox" name="q27" value="d"><span> Es un ejemplo de aplicación clínica del estudio de secuencias</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>28. ¿Qué son las familias de proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q28" value="a"><span> Grupos que comparten similitudes estructurales y funcionales</span></label>
+                        <label><input type="checkbox" name="q28" value="b"><span> Sus secuencias son idénticas en un 25% o más</span></label>
+                        <label><input type="checkbox" name="q28" value="c"><span> Pueden definirse por aminoácidos críticos para cierta función</span></label>
+                        <label><input type="checkbox" name="q28" value="d"><span> Indican que tienen un ancestro común</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>29. ¿Qué es una secuencia consenso?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q29" value="a"><span> Refleja el aminoácido más frecuente en cada posición</span></label>
+                        <label><input type="checkbox" name="q29" value="b"><span> Se establece dentro de una familia de proteínas</span></label>
+                        <label><input type="checkbox" name="q29" value="c"><span> Representa dominios funcionales conservados</span></label>
+                        <label><input type="checkbox" name="q29" value="d"><span> Es idéntica en todas las proteínas</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>30. ¿Qué tipos de homólogos existen en las familias de proteínas?</p>
+                    <div class="options">
+                        <label><input type="checkbox" name="q30" value="a"><span> Parálogos: miembros en la misma especie</span></label>
+                        <label><input type="checkbox" name="q30" value="b"><span> Ortólogos: homólogos en especies diferentes</span></label>
+                        <label><input type="checkbox" name="q30" value="c"><span> Se identifican con herramientas bioinformáticas</span></label>
+                        <label><input type="checkbox" name="q30" value="d"><span> Permiten construir árboles evolutivos</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button onclick="checkAnswers()">Comprobar respuestas</button>
+            <button onclick="resetQuiz()">Reiniciar cuestionario</button>
+            <button class="home-button" onclick="window.location.href='lipidos_1.html'">Volver a Lípidos</button>
+        </div>
+        
+        <div class="answer-key" id="solucionario" style="display:none;">
+            <h2><span class="kawaii-icon">📝</span>Solucionario</h2>
+            <div id="answers"></div>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            // Respuestas correctas
+            const correctAnswers = {
+                q1: ['a', 'b', 'c'],
+                q2: ['a', 'b', 'c'],
+                q3: ['a', 'b', 'c'],
+                q4: ['a', 'b', 'c', 'd'],
+                q5: ['a', 'b', 'c'],
+                q6: ['a', 'b', 'c'],
+                q7: ['a', 'b', 'c'],
+                q8: ['a', 'b', 'c', 'd'],
+                q9: ['a', 'b', 'c'],
+                q10: ['a', 'b', 'c', 'd'],
+                q11: ['a', 'b', 'c', 'd'],
+                q12: ['a', 'b', 'c'],
+                q13: ['a', 'b', 'c'],
+                q14: ['a', 'b', 'c'],
+                q15: ['a', 'b', 'c', 'd'],
+                q16: ['a', 'b', 'c', 'd'],
+                q17: ['a', 'b', 'c', 'd'],
+                q18: ['a', 'b', 'c', 'd'],
+                q19: ['a', 'b', 'c'],
+                q20: ['a', 'b', 'c'],
+                q21: ['a', 'b', 'c'],
+                q22: ['a', 'b', 'c', 'd'],
+                q23: ['a', 'b', 'c'],
+                q24: ['a', 'b'],
+                q25: ['a'],
+                q26: ['a', 'b', 'c', 'd'],
+                q27: ['a', 'b', 'c', 'd'],
+                q28: ['a', 'b', 'c', 'd'],
+                q29: ['a', 'b', 'c'],
+                q30: ['a', 'b', 'c', 'd']
+            };
+            
+            // Fundamentos de las respuestas
+            const answerExplanations = {
+                q1: "Las proteínas son biomoléculas esenciales con tamaños variables y diferentes criterios de clasificación. No siempre tienen la misma estructura y función.",
+                q2: "Para estudiar proteínas es importante entender sus niveles estructurales, que la estructura primaria determina la función y los criterios de clasificación. No todas son iguales en composición.",
+                q3: "La estructura primaria incluye secuencia aminoacídica, puentes disulfuro y modificaciones postraduccionales. La estructura tridimensional corresponde a niveles superiores.",
+                q4: "El estudio de la estructura primaria es importante porque determina el plegamiento, aporta información sobre función, permite entender evolución y tiene aplicaciones clínicas.",
+                q5: "La bibliografía recomendada es Principios de Bioquímica de Lehninger, Nelson y Cox, 4ta edición, capítulo 3 páginas 97-111.",
+                q6: "Las proteínas tienen tamaños variables, los oligopéptidos <30 aa y las proteínas >50 aa. No todas tienen el mismo tamaño.",
+                q7: "Un polipéptido tiene 30-50 aminoácidos y masa 3000-5000 Da. Las proteínas completas tienen >50 aminoácidos.",
+                q8: "Todos estos ejemplos de proteínas y sus tamaños son correctos según la tabla proporcionada.",
+                q9: "Cadena polipeptídica y proteína no son sinónimos porque una proteína puede tener múltiples cadenas. No siempre son equivalentes.",
+                q10: "Las proteínas se clasifican en monoméricas (1 cadena), multiméricas (múltiples cadenas), homomultiméricas (un tipo) y heteromultiméricas (varios tipos).",
+                q11: "Todos estos criterios se utilizan para clasificar proteínas: físicos, químicos, estructurales y funcionales.",
+                q12: "Las prolaminas son solubles en alcohol, como la gliadina de trigo. Las globulinas son solubles en soluciones salinas.",
+                q13: "Las proteínas conjugadas tienen grupo prostético, holoproteína = apoproteína + grupo prostético, e incluyen hemoglobina. Las simples solo tienen aminoácidos.",
+                q14: "Las proteínas globulares son esféricas, las fibrosas tienen una dimensión predominante y suelen ser estructurales. Las globulares no son siempre insolubles.",
+                q15: "Todos estos ejemplos de proteínas conjugadas son correctos según la clasificación.",
+                q16: "Los cuatro niveles de organización estructural son: primaria, secundaria, terciaria y cuaternaria.",
+                q17: "Las proteínas fibrosas tienen estructura lineal, rol estructural y son generalmente insolubles. Las globulares son esféricas y solubles.",
+                q18: "Las proteínas de membrana están asociadas a membranas, tienen AAs hidrofóbicos expuestos, son insolubles y requieren detergentes.",
+                q19: "La estructura secundaria incluye alfa hélice, hojas beta y giros beta. La secuencia aminoacídica es estructura primaria.",
+                q20: "La estructura terciaria es el plegamiento de una cadena, la cuaternaria implica interacción de múltiples cadenas (subunidades). No todas tienen cuaternaria.",
+                q21: "La estructura primaria incluye secuencia aminoacídica, puentes disulfuro y modificaciones postraduccionales. La estructura 3D es terciaria.",
+                q22: "La secuencia aminoacídica es característica distintiva, criterio de identidad, determina plegamiento y afecta la función.",
+                q23: "Composición es la cantidad de cada aa, secuencia es la disposición específica. Con misma composición puede haber diferentes secuencias. No son equivalentes.",
+                q24: "La secuencia se lee del extremo N (amino) al C (carboxilo), que es el orden de unión.",
+                q25: "La estructura primaria se estabiliza principalmente por enlaces peptídicos. Los puentes disulfuro también contribuyen pero no son la fuerza principal.",
+                q26: "La secuencia proporciona información sobre mecanismo de acción, función, localización, relaciones evolutivas y sitios de unión.",
+                q27: "La anemia falciforme es causada por mutación en hemoglobina que cambia un aminoácido, afecta forma de eritrocitos y es ejemplo de aplicación clínica.",
+                q28: "Las familias comparten similitudes estructurales/funcionales, secuencias >25% idénticas, pueden definirse por aa críticos e indican ancestro común.",
+                q29: "La secuencia consenso refleja el aa más frecuente en cada posición dentro de una familia, representando dominios conservados. No es idéntica en todas.",
+                q30: "Los homólogos son parálogos (misma especie), ortólogos (especies diferentes), se identifican bioinformáticamente y permiten árboles evolutivos."
+            };
+            
+            let resultsHTML = "";
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            
+            for (const question in correctAnswers) {
+                const selectedOptions = Array.from(document.querySelectorAll(`input[name="${question}"]:checked`)).map(input => input.value);
+                const correctOptions = correctAnswers[question];
+                
+                // Verificar si las respuestas seleccionadas son correctas
+                const isCorrect = selectedOptions.length === correctOptions.length && 
+                                 selectedOptions.every(option => correctOptions.includes(option));
+                
+                if (isCorrect) {
+                    score++;
+                }
+                
+                resultsHTML += `
+                    <div class="question">
+                        <p><strong>Pregunta ${question.replace('q', '')}:</strong> ${isCorrect ? '✅ Correcta' : '❌ Incorrecta'}</p>
+                        <p><strong>Respuesta correcta:</strong> ${correctOptions.join(', ')}</p>
+                        <div class="answer-explanation">
+                            <strong>Fundamento:</strong> ${answerExplanations[question]}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Mostrar puntuación y respuestas
+            document.getElementById('answers').innerHTML = `
+                <h3>Puntuación: ${score} / ${totalQuestions}</h3>
+                ${resultsHTML}
+            `;
+            
+            document.getElementById('solucionario').style.display = 'block';
+            
+            // Desplazarse al solucionario
+            document.getElementById('solucionario').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function resetQuiz() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            document.getElementById('solucionario').style.display = 'none';
+        }
+        
+        // Añadir efecto visual adicional al hacer clic en las opciones
+        document.querySelectorAll('.options input').forEach(input => {
+            input.addEventListener('change', function() {
+                const label = this.closest('label');
+                if (this.checked) {
+                    label.style.backgroundColor = '#ffd6e0';
+                    label.style.border = '2px solid #ff85a2';
+                    label.style.transform = 'scale(1.02)';
+                    label.style.boxShadow = '0 2px 8px rgba(255, 133, 162, 0.3)';
+                } else {
+                    label.style.backgroundColor = '';
+                    label.style.border = '2px solid transparent';
+                    label.style.transform = '';
+                    label.style.boxShadow = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
